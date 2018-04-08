@@ -12,6 +12,7 @@
 		2C49C3FD2079499B001825A1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C49C3FB2079499B001825A1 /* Main.storyboard */; };
 		2C49C3FF2079499C001825A1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C49C3FE2079499C001825A1 /* Assets.xcassets */; };
 		2C49C4022079499C001825A1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C49C4002079499C001825A1 /* LaunchScreen.storyboard */; };
+		2C6BAC022079796E00C19E1B /* WeatherDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6BAC012079796E00C19E1B /* WeatherDataModel.swift */; };
 		3DFA76235ED4E075F0F1E0D6 /* Pods_climat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 428D62A289C0268CB7730CD3 /* Pods_climat.framework */; };
 /* End PBXBuildFile section */
 
@@ -24,6 +25,7 @@
 		2C49C3FE2079499C001825A1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2C49C4012079499C001825A1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2C49C4032079499C001825A1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2C6BAC012079796E00C19E1B /* WeatherDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherDataModel.swift; sourceTree = "<group>"; };
 		3B567EBDF6ADEAA565BCDB4F /* Pods-climat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-climat.debug.xcconfig"; path = "Pods/Target Support Files/Pods-climat/Pods-climat.debug.xcconfig"; sourceTree = "<group>"; };
 		428D62A289C0268CB7730CD3 /* Pods_climat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_climat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -70,14 +72,39 @@
 		2C49C3F62079499B001825A1 /* climat */ = {
 			isa = PBXGroup;
 			children = (
-				2C49C3F72079499B001825A1 /* AppDelegate.swift */,
-				2C49C3F92079499B001825A1 /* ViewController.swift */,
-				2C49C3FB2079499B001825A1 /* Main.storyboard */,
+				2C6BAC002079770500C19E1B /* controller */,
+				2C6BABFF207976FC00C19E1B /* view */,
+				2C6BABFE207976EC00C19E1B /* model */,
 				2C49C3FE2079499C001825A1 /* Assets.xcassets */,
 				2C49C4002079499C001825A1 /* LaunchScreen.storyboard */,
 				2C49C4032079499C001825A1 /* Info.plist */,
 			);
 			path = climat;
+			sourceTree = "<group>";
+		};
+		2C6BABFE207976EC00C19E1B /* model */ = {
+			isa = PBXGroup;
+			children = (
+				2C6BAC012079796E00C19E1B /* WeatherDataModel.swift */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		2C6BABFF207976FC00C19E1B /* view */ = {
+			isa = PBXGroup;
+			children = (
+				2C49C3FB2079499B001825A1 /* Main.storyboard */,
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
+		2C6BAC002079770500C19E1B /* controller */ = {
+			isa = PBXGroup;
+			children = (
+				2C49C3F72079499B001825A1 /* AppDelegate.swift */,
+				2C49C3F92079499B001825A1 /* ViewController.swift */,
+			);
+			path = controller;
 			sourceTree = "<group>";
 		};
 		C46A51C34AF67BBF23CB7AC3 /* Frameworks */ = {
@@ -181,11 +208,13 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-climat/Pods-climat-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -220,6 +249,7 @@
 			files = (
 				2C49C3FA2079499B001825A1 /* ViewController.swift in Sources */,
 				2C49C3F82079499B001825A1 /* AppDelegate.swift in Sources */,
+				2C6BAC022079796E00C19E1B /* WeatherDataModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
