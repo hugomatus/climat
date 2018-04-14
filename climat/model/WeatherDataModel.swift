@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 class WeatherDataModel {
   //var downloadURL = NSURL(string: "http://cdn.sstatic.net/Sites/stackoverflow/company/Img/photos/big/6.jpg?v=f4b7c5fee820")!
@@ -30,6 +31,7 @@ class WeatherDataModel {
   //Weather condition within the group
   var weatherDescription: String? = nil
   var weatherIcon: String? = nil
+  var weatherIconImage: UIImage? = nil
   
   //main
   var temp : Double? = nil

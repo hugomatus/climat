@@ -21,7 +21,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
   //  URL is
   //  http://openweathermap.org/img/w/10d.png
   
-  let WEATHER_URL = "http://api.openweathermap.org/data/2.5/weather"
+  let API_URL = "http://api.openweathermap.org/data/2.5/weather"
   let APP_ID = "f1f88a9acc94bde45346f66fb09a1804"
   
   let weatherDataModel = WeatherDataModel()
@@ -35,7 +35,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    // Do any additional setup after loading the view, typically from a nib.
     locationManager.delegate = self
     locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
     locationManager.requestWhenInUseAuthorization()
@@ -45,9 +44,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
   
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
-    // Dispose of any resources that can be recreated.
     
   }
+  
   
   /**
    * Get location and call Open WeatherAPI for weather details
@@ -61,66 +60,102 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
       
       locationManager.stopUpdatingLocation();
       
-      let latitude = location.coordinate.longitude
+      let latitude = location.coordinate.latitude
       let longitude = location.coordinate.longitude
       
       print("logitude: \(longitude) lattitude: \(latitude)")
       
       let params : [String : String] = ["lat" : String(latitude), "lon" : String(longitude), "appid" : APP_ID]
+      getWeatherData(parameters: params)
       
-      let weatherDataModel = getWeatherData(parameters: params)
-      
-      updateUI(weatherDataModel: weatherDataModel)
     }
-    
   }
   
+  
   /**
-   *
+   * Fetches Weather Icon from Open Weather
    **/
-  func updateUI(weatherDataModel: WeatherDataModel) {
+  func getWeatherIconImage(weatherIconImageName : String) {
     
-    cityLabel.text = weatherDataModel.cityName
-    weatherDescription.text = weatherDataModel.weatherDescription
-    currentTempLabel.text = "\(String(describing: weatherDataModel.temp!))"
+    print("start weather image downloading...")
     
-    Alamofire.request("http://openweathermap.org/img/w/10d.png").responseImage { response in
+    Alamofire.request("http://openweathermap.org/img/w/"+weatherIconImageName).responseImage {
+      response in
       debugPrint(response)
-      
       print(response.request!)
       print(response.response!)
       debugPrint(response.result)
       
       if let image = response.result.value {
         print("image downloaded: \(image)")
-        
-        self.weatherIconImage.image = image
-        
+        self.updateWeatherIcon(iconImage: image)
       }
     }
-    
-    
   }
   
   /**
    * Fetches Weather Data from Open Weather API and returns WeatherDataModel
    **/
-  func getWeatherData(parameters: [String : String]) -> WeatherDataModel {
+  func getWeatherData(parameters: [String : String])  {
     
-    let weatherDataModel = WeatherDataModel()
+    print("start weather data downloading...")
     
-    weatherDataModel.cityName = "Portland"
-    weatherDataModel.weatherDescription = "Heavy Rain"
-    weatherDataModel.temp = 55.0
-    
-    
-    return weatherDataModel
+    Alamofire.request(API_URL, method: .get, parameters: parameters).responseJSON {
+      response in
+      if (response.result.isSuccess) {
+        print("Success! Got the Weather Data")
+        let weatherJSON : JSON = JSON(response.result.value!)
+        print(weatherJSON)
+        self.updateWeatherData(json: weatherJSON)
+        print(("Image here: \(String(describing: self.weatherDataModel.weatherIcon!)).png"))
+        self.getWeatherIconImage(weatherIconImageName: ("\(String(describing: self.weatherDataModel.weatherIcon!)).png"))
+        self.updateWeatherIcon(iconImage: self.weatherDataModel.weatherIconImage)
+      } else {
+        print("Error\(response.error!)")
+        self.cityLabel.text = "Connection Issue"
+      }
+    }
   }
   
+  func updateWeatherData(json: JSON) {
+    if let tempResult = json["main"]["temp"].double {
+      weatherDataModel.temp = (tempResult - 273.15)
+      weatherDataModel.cityName = json["name"].stringValue
+      weatherDataModel.weatherDescription = json["weather"][0]["description"].stringValue
+      
+      //weather condition codes - extract from API site
+      weatherDataModel.weatherId = json["weather"][0]["id"].intValue
+      weatherDataModel.weatherIcon = json["weather"][0]["icon"].stringValue
+      
+      print("City \(String(describing: weatherDataModel.cityName))")
+      
+      
+    } else {
+      cityLabel.text = "Weather Unavailable"
+    }
+    
+    updateUIWithWeatherData()
+  }
   
+  func updateWeatherIcon(iconImage : UIImage!) {
+    
+    weatherDataModel.weatherIconImage = iconImage
+    weatherIconImage.image = iconImage
+  }
   
-  
-  
-  
+  //MARK: - UI Updates
+  func updateUIWithWeatherData() {
+    cityLabel.text = weatherDataModel.cityName
+    
+    let tempF = weatherDataModel.convertCelsiusToFahrenheit(tempInCelsius:weatherDataModel.temp!)
+    //currentTempLabel.text = "\(Int(tempF))°"
+    cityLabel.text = weatherDataModel.cityName
+    weatherDescription.text = weatherDataModel.weatherDescription
+    currentTempLabel.text = String(format: "%.2f", tempF)
+    
+    print("Weather Image \(String(describing: weatherDataModel.weatherIconImage))")
+    weatherIconImage.image = weatherDataModel.weatherIconImage
+    
+  }
 }
 
