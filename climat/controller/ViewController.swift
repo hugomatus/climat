@@ -82,7 +82,23 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     
     cityLabel.text = weatherDataModel.cityName
     weatherDescription.text = weatherDataModel.weatherDescription
-    currentTempLabel.text = "\(String(describing: weatherDataModel.temp))"
+    currentTempLabel.text = "\(String(describing: weatherDataModel.temp!))"
+    
+    Alamofire.request("http://openweathermap.org/img/w/10d.png").responseImage { response in
+      debugPrint(response)
+      
+      print(response.request!)
+      print(response.response!)
+      debugPrint(response.result)
+      
+      if let image = response.result.value {
+        print("image downloaded: \(image)")
+        
+        self.weatherIconImage.image = image
+        
+      }
+    }
+    
     
   }
   
