@@ -23,6 +23,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
   
   let WEATHER_URL = "http://api.openweathermap.org/data/2.5/weather"
   let APP_ID = "f1f88a9acc94bde45346f66fb09a1804"
+  
   let weatherDataModel = WeatherDataModel()
   let locationManager = CLLocationManager()
   
@@ -33,11 +34,13 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    // Do any additional setup after loading the view, typically from a nib.
     locationManager.delegate = self
     locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
     locationManager.requestWhenInUseAuthorization()
     locationManager.startUpdatingLocation()
-    // Do any additional setup after loading the view, typically from a nib.
+    
   }
   
   override func didReceiveMemoryWarning() {
@@ -45,6 +48,63 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     // Dispose of any resources that can be recreated.
     
   }
+  
+  /**
+   * Get location and call Open WeatherAPI for weather details
+   **/
+  func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    
+    //get the most recent location
+    let location = locations[locations.count-1]
+    
+    if location.horizontalAccuracy > 0 {
+      
+      locationManager.stopUpdatingLocation();
+      
+      let latitude = location.coordinate.longitude
+      let longitude = location.coordinate.longitude
+      
+      print("logitude: \(longitude) lattitude: \(latitude)")
+      
+      let params : [String : String] = ["lat" : String(latitude), "lon" : String(longitude), "appid" : APP_ID]
+      
+      let weatherDataModel = getWeatherData(parameters: params)
+      
+      updateUI(weatherDataModel: weatherDataModel)
+    }
+    
+  }
+  
+  /**
+   *
+   **/
+  func updateUI(weatherDataModel: WeatherDataModel) {
+    
+    cityLabel.text = weatherDataModel.cityName
+    weatherDescription.text = weatherDataModel.weatherDescription
+    currentTempLabel.text = "\(String(describing: weatherDataModel.temp))"
+    
+  }
+  
+  /**
+   * Fetches Weather Data from Open Weather API and returns WeatherDataModel
+   **/
+  func getWeatherData(parameters: [String : String]) -> WeatherDataModel {
+    
+    let weatherDataModel = WeatherDataModel()
+    
+    weatherDataModel.cityName = "Portland"
+    weatherDataModel.weatherDescription = "Heavy Rain"
+    weatherDataModel.temp = 55.0
+    
+    
+    return weatherDataModel
+  }
+  
+  
+  
+  
+  
   
 }
 
