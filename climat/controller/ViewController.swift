@@ -145,14 +145,12 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
   
   //MARK: - UI Updates
   func updateUIWithWeatherData() {
-    cityLabel.text = weatherDataModel.cityName
     
-    let tempF = weatherDataModel.convertCelsiusToFahrenheit(tempInCelsius:weatherDataModel.temp!)
-    //currentTempLabel.text = "\(Int(tempF))°"
+    cityLabel.text = weatherDataModel.cityName
+    let tempF = Int(weatherDataModel.convertCelsiusToFahrenheit(tempInCelsius:weatherDataModel.temp!).rounded())
     cityLabel.text = weatherDataModel.cityName
     weatherDescription.text = weatherDataModel.weatherDescription
-    currentTempLabel.text = String(format: "%.2f", tempF)
-    
+    currentTempLabel.text = String(tempF)+" ℉"
     print("Weather Image \(String(describing: weatherDataModel.weatherIconImage))")
     weatherIconImage.image = weatherDataModel.weatherIconImage
     
