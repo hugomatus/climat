@@ -31,6 +31,10 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
   @IBOutlet weak var weatherDescription: UILabel!
   @IBOutlet weak var weatherIconImage: UIImageView!
   @IBOutlet weak var currentTempLabel: UILabel!
+  @IBOutlet weak var minTempLabel: UILabel!
+  @IBOutlet weak var maxTempLabel: UILabel!
+  @IBOutlet weak var sunRiseLabel: UILabel!
+  @IBOutlet weak var sunSetLabel: UILabel!
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -126,7 +130,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
       weatherDataModel.presure = (json["main"]["pressure"].int!)
       weatherDataModel.cityName = json["name"].stringValue
       weatherDataModel.weatherDescription = json["weather"][0]["description"].stringValue
-      
+      weatherDataModel.sunriseUTC = json["sys"]["sunrise"].int
+      weatherDataModel.sunsetTUC = json["sys"]["sunset"].int
       //weather condition codes - extract from API site
       weatherDataModel.weatherId = json["weather"][0]["id"].intValue
       weatherDataModel.weatherIcon = json["weather"][0]["icon"].stringValue
@@ -157,7 +162,43 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     currentTempLabel.text = String(tempF)+" ℉"
     print("Weather Image \(String(describing: weatherDataModel.weatherIconImage))")
     weatherIconImage.image = weatherDataModel.weatherIconImage
+    minTempLabel.text = "min: \(Int(weatherDataModel.convertCelsiusToFahrenheit(tempInCelsius:weatherDataModel.tempMin!).rounded())) ℉"
+    maxTempLabel.text = "max: \(Int(weatherDataModel.convertCelsiusToFahrenheit(tempInCelsius:weatherDataModel.tempMax!).rounded())) ℉"
     
+    print("sunrise: \(String(describing: getReadableDate(timeStamp: TimeInterval(weatherDataModel.sunriseUTC!))))")
+    
+    sunRiseLabel.text = getReadableDate(timeStamp: TimeInterval(weatherDataModel.sunriseUTC!))
+    
+    
+    sunSetLabel.text = getReadableDate(timeStamp: TimeInterval(weatherDataModel.sunsetTUC!))
+  }
+  
+  func getReadableDate(timeStamp: TimeInterval) -> String {
+    let date = Date(timeIntervalSince1970: timeStamp)
+    let dateFormatter = DateFormatter()
+    
+    if Calendar.current.isDateInTomorrow(date) {
+      return "Tomorrow"
+    } else if Calendar.current.isDateInYesterday(date) {
+      return "Yesterday"
+    } else if dateFallsInCurrentWeek(date: date) {
+      if Calendar.current.isDateInToday(date) {
+        dateFormatter.dateFormat = "h:mm a"
+        return dateFormatter.string(from: date)
+      } else {
+        dateFormatter.dateFormat = "EEEE"
+        return dateFormatter.string(from: date)
+      }
+    } else {
+      dateFormatter.dateFormat = "MMM d, yyyy"
+      return dateFormatter.string(from: date)
+    }
+  }
+  
+  func dateFallsInCurrentWeek(date: Date) -> Bool {
+    let currentWeek = Calendar.current.component(Calendar.Component.weekOfYear, from: Date())
+    let datesWeek = Calendar.current.component(Calendar.Component.weekOfYear, from: date)
+    return (currentWeek == datesWeek)
   }
 }
 
