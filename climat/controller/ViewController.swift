@@ -11,8 +11,9 @@ import CoreLocation
 
 import Alamofire
 import AlamofireImage
+import SwiftyJSON
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, CLLocationManagerDelegate {
   
   //  https://openweathermap.org/weather-conditions
   //  How to get icon URL
@@ -32,6 +33,10 @@ class ViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    locationManager.delegate = self
+    locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
+    locationManager.requestWhenInUseAuthorization()
+    locationManager.startUpdatingLocation()
     // Do any additional setup after loading the view, typically from a nib.
   }
   
@@ -39,9 +44,7 @@ class ViewController: UIViewController {
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.
     
-    let w = WeatherDataModel()
-    
-    
   }
+  
 }
 

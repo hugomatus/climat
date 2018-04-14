@@ -9,44 +9,44 @@
 import Foundation
 
 class WeatherDataModel {
-  //let downloadURL = NSURL(string: "http://cdn.sstatic.net/Sites/stackoverflow/company/Img/photos/big/6.jpg?v=f4b7c5fee820")!
+  //var downloadURL = NSURL(string: "http://cdn.sstatic.net/Sites/stackoverflow/company/Img/photos/big/6.jpg?v=f4b7c5fee820")!
   //imageView.af_setImageWithURL(downloadURL)
   
   //city
-  let cityId : Int? = nil
-  let cityName : String? = nil
-  let cityCode : Int? = nil
+  var cityId : Int? = nil
+  var cityName : String? = nil
+  var cityCode : Int? = nil
   
   //sys
-  let country : String? = nil
-  let sunriseUTC : Int? = nil
-  let sunsetTUC : Int? = nil
+  var country : String? = nil
+  var sunriseUTC : Int? = nil
+  var sunsetTUC : Int? = nil
   
   //Weather condition codes
-  let weatherId: Int? = nil
+  var weatherId: Int? = nil
   
   //Group of weather parameters (Rain, Snow, Extreme etc.)
-  let weatherMain: String? = nil
+  var weatherMain: String? = nil
   //Weather condition within the group
-  let weatherDescription: String? = nil
-  let weatherIcon: String? = nil
+  var weatherDescription: String? = nil
+  var weatherIcon: String? = nil
   
   //main
-  let temp : Double? = nil
-  let presure : Int? = nil
-  let humidity : Int? = nil
-  let tempMin : Double? = nil
-  let tempMax : Double? = nil
+  var temp : Double? = nil
+  var presure : Int? = nil
+  var humidity : Int? = nil
+  var tempMin : Double? = nil
+  var tempMax : Double? = nil
   
   //wind
-  let windSpeed : Double? = nil
-  let windDeg: Double? = nil
+  var windSpeed : Double? = nil
+  var windDeg: Double? = nil
   
   //rain: Rain volume for the last 3 hours
-  let rainInLastThreeHours : Double? = nil
+  var rainInLastThreeHours : Double? = nil
   
   //clouds: Cloudiness
-  let cloundsAll: Double? = nil
+  var cloundsAll: Double? = nil
   
   func convertFahrenheitToCelsius(tempInFahrenheit:Double) ->Double {
     let celsius = (tempInFahrenheit - 32.0) * (5.0/9.0)
