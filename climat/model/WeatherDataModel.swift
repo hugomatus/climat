@@ -9,6 +9,16 @@
 import Foundation
 import UIKit
 
+extension String {
+  func capitalizingFirstLetter() -> String {
+    return prefix(1).uppercased() + dropFirst()
+  }
+  
+  mutating func capitalizeFirstLetter() {
+    self = self.capitalizingFirstLetter()
+  }
+}
+
 class WeatherDataModel {
   //var downloadURL = NSURL(string: "http://cdn.sstatic.net/Sites/stackoverflow/company/Img/photos/big/6.jpg?v=f4b7c5fee820")!
   //imageView.af_setImageWithURL(downloadURL)

@@ -161,7 +161,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     cityLabel.text = weatherDataModel.cityName
     let tempF = Int(weatherDataModel.convertCelsiusToFahrenheit(tempInCelsius:weatherDataModel.temp!).rounded())
     cityLabel.text = weatherDataModel.cityName
-    weatherDescription.text = weatherDataModel.weatherDescription
+    weatherDescription.text = weatherDataModel.weatherDescription?.capitalizingFirstLetter()
     currentTempLabel.text = String(tempF)+" ℉"
     print("Weather Image \(String(describing: weatherDataModel.weatherIconImage))")
     weatherIconImage.image = weatherDataModel.weatherIconImage
@@ -184,9 +184,13 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     let dateFormatter = DateFormatter()
     
     if Calendar.current.isDateInTomorrow(date) {
-      return "Tomorrow"
+      //return "Tomorrow"
+      dateFormatter.dateFormat = "h:mm a"
+      return dateFormatter.string(from: date)
     } else if Calendar.current.isDateInYesterday(date) {
-      return "Yesterday"
+      //return "Yesterday"
+      dateFormatter.dateFormat = "h:mm a"
+      return dateFormatter.string(from: date)
     } else if dateFallsInCurrentWeek(date: date) {
       if Calendar.current.isDateInToday(date) {
         dateFormatter.dateFormat = "h:mm a"
