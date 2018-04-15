@@ -34,9 +34,22 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
   @IBOutlet weak var sunSetLabel: UILabel!
   @IBOutlet weak var windSpeedLabel: UILabel!
   @IBOutlet weak var humidityLabel: UILabel!
+  @IBOutlet weak var pressureLabel: UILabel!
+  @IBOutlet weak var dateTimeLabel: UILabel!
+  
+  
+  let now = Date()
+  let calendar = Calendar.current
+  let currentTimeFormatter = DateFormatter()
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    
+    
+    currentTimeFormatter.dateStyle = .full
+    
+    dateTimeLabel.text = currentTimeFormatter.string(from: now)
     
     locationManager.delegate = self
     locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
@@ -83,6 +96,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
   
   //MARK: - UI Updates
   func updateUIWithWeatherData(weatherDataModel : WeatherDataModel) {
+     dateTimeLabel.text = currentTimeFormatter.string(from: now)
     cityLabel.text = weatherDataModel.cityName
     let tempF = Int(weatherDataModel.convertCelsiusToFahrenheit(tempInCelsius:weatherDataModel.temp!).rounded())
     cityLabel.text = weatherDataModel.cityName
@@ -94,8 +108,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     maxTempLabel.text = "\(Int(weatherDataModel.convertCelsiusToFahrenheit(tempInCelsius:weatherDataModel.tempMax!).rounded())) ℉"
     sunRiseLabel.text = weatherAPI.getReadableDate(timeStamp: TimeInterval(weatherDataModel.sunriseUTC!))
     sunSetLabel.text = weatherAPI.getReadableDate(timeStamp: TimeInterval(weatherDataModel.sunsetTUC!))
-    windSpeedLabel.text = "\(weatherDataModel.windSpeed!) m/h"
+    windSpeedLabel.text = "\(weatherDataModel.windSpeed!) m/h  \(weatherDataModel.getWindDirection())"
     humidityLabel.text = "\(weatherDataModel.humidity!) %"
+    pressureLabel.text = "\(weatherDataModel.presure!) hpa"
   }
 }
 

@@ -75,6 +75,8 @@ final class WeatherAPI {
       weatherDataModel.humidity = (jsonData["main"]["humidity"].int!)
       weatherDataModel.presure = (jsonData["main"]["pressure"].int!)
       weatherDataModel.windSpeed = (jsonData["wind"]["speed"].double!)
+      weatherDataModel.windDeg = (jsonData["wind"]["deg"].double!)
+      
       weatherDataModel.cityName = jsonData["name"].stringValue
       weatherDataModel.weatherDescription = jsonData["weather"][0]["description"].stringValue
       weatherDataModel.sunriseUTC = jsonData["sys"]["sunrise"].int
