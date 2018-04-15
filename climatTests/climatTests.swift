@@ -17,9 +17,6 @@ class climatTests: XCTestCase {
   override func setUp() {
     super.setUp()
     weatherAPIUnderTest = WeatherAPI()
-    //let params = ["lat" : "45.3583829803815", "lon" : "122.621515710021", "appid" : weatherAPIUnderTest.APP_ID]
-    //logitude: -122.621515710021 lattitude: 45.3583829803815
-    
     
     // Put setup code here. This method is called before the invocation of each test method in the class.
   }
@@ -44,19 +41,13 @@ class climatTests: XCTestCase {
   
   func testWeatherAPI() {
     
-    let params = ["lat" : "45.3583829803815", "lon" : "122.621515710021", "appid" : weatherAPIUnderTest.APP_ID]
-    
-    weatherAPIUnderTest.getDataFromInterwebs(parameters: params) { data in
-      print(data)
-      self.weatherAPIUnderTest.parseString(jsonDataString: data)
-    }
-//    let jsonData = weatherAPIUnderTest.getDataFromInterwebs(parameters: params, complete: <#T##(JSON) -> Void#>) { (reviews) in
-//      var reviewJson = reviews
-//      dispatch_async(dispatch_get_main_queue(), {
-//        //self.didGetRattingJson(reviewJson)
-//      })
+//    let params = ["lat" : "45.3583829803815", "lon" : "122.621515710021", "appid" : weatherAPIUnderTest.APP_ID]
+//
+//    weatherAPIUnderTest.getWeatherOpenWeatherData(parameters: params) { (payloadJSON) in
+//      print("Test Result \(payloadJSON)")
+//      //self.handleData(data: payloadJSON)
 //    }
-     print("API_RESULTS2: \(weatherAPIUnderTest.weatherDataModel.cityName) ** \(weatherAPIUnderTest.weatherDataModel.weatherIconImage)")
+    
     XCTAssert(weatherAPIUnderTest.weatherDataModel != nil)
     
   }

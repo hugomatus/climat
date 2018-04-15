@@ -14,8 +14,8 @@ import SwiftyJSON
 
 
 /**
- *  Facade for WeatherAPI
- **/
+ OpenWeather API
+ */
 final class WeatherAPI {
   
   let API_URL = "http://api.openweathermap.org/data/2.5/weather"
@@ -28,9 +28,16 @@ final class WeatherAPI {
     weatherDataModel = WeatherDataModel()
   }
   
+  /**
+   Fetches Weather Data and Parses the JSON string into a JSON object
+   
+   - parameter parameters: The Request Parameters
+   
+   - parameter completionHandler: The Callback Handler
+   
+   - returns: The Response as a JSON object
+   */
   func getWeatherOpenWeatherData(parameters : [String : String], completionHandler:@escaping (_ payloadJSON: (JSON)) -> Void) {
-    
-    print("start weather data downloading...")
     
     Alamofire.request(API_URL, method: .get, parameters: parameters).responseJSON {
       response in
