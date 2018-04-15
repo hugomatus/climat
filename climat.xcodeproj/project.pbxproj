@@ -14,8 +14,20 @@
 		2C49C4022079499C001825A1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C49C4002079499C001825A1 /* LaunchScreen.storyboard */; };
 		2C6BAC022079796E00C19E1B /* WeatherDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6BAC012079796E00C19E1B /* WeatherDataModel.swift */; };
 		2C867C4A2082548000E1E8B3 /* sample-response.json in Resources */ = {isa = PBXBuildFile; fileRef = 2C867C492082548000E1E8B3 /* sample-response.json */; };
+		2C867C4E20838B2E00E1E8B3 /* WeatherAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C867C4D20838B2E00E1E8B3 /* WeatherAPI.swift */; };
+		2C867C562083974400E1E8B3 /* climatTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C867C552083974400E1E8B3 /* climatTests.swift */; };
 		3DFA76235ED4E075F0F1E0D6 /* Pods_climat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 428D62A289C0268CB7730CD3 /* Pods_climat.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		2C867C582083974400E1E8B3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2C49C3EC2079499B001825A1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2C49C3F32079499B001825A1;
+			remoteInfo = climat;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		13364184D0440072B4120EAA /* Pods-climat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-climat.release.xcconfig"; path = "Pods/Target Support Files/Pods-climat/Pods-climat.release.xcconfig"; sourceTree = "<group>"; };
@@ -28,6 +40,10 @@
 		2C49C4032079499C001825A1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2C6BAC012079796E00C19E1B /* WeatherDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherDataModel.swift; sourceTree = "<group>"; };
 		2C867C492082548000E1E8B3 /* sample-response.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "sample-response.json"; sourceTree = "<group>"; };
+		2C867C4D20838B2E00E1E8B3 /* WeatherAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherAPI.swift; sourceTree = "<group>"; };
+		2C867C532083974400E1E8B3 /* climatTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = climatTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2C867C552083974400E1E8B3 /* climatTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = climatTests.swift; sourceTree = "<group>"; };
+		2C867C572083974400E1E8B3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3B567EBDF6ADEAA565BCDB4F /* Pods-climat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-climat.debug.xcconfig"; path = "Pods/Target Support Files/Pods-climat/Pods-climat.debug.xcconfig"; sourceTree = "<group>"; };
 		428D62A289C0268CB7730CD3 /* Pods_climat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_climat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -38,6 +54,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				3DFA76235ED4E075F0F1E0D6 /* Pods_climat.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2C867C502083974400E1E8B3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -57,6 +80,7 @@
 			isa = PBXGroup;
 			children = (
 				2C49C3F62079499B001825A1 /* climat */,
+				2C867C542083974400E1E8B3 /* climatTests */,
 				2C49C3F52079499B001825A1 /* Products */,
 				18AFF87BDA2588F620983F7F /* Pods */,
 				C46A51C34AF67BBF23CB7AC3 /* Frameworks */,
@@ -67,6 +91,7 @@
 			isa = PBXGroup;
 			children = (
 				2C49C3F42079499B001825A1 /* climat.app */,
+				2C867C532083974400E1E8B3 /* climatTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -74,6 +99,7 @@
 		2C49C3F62079499B001825A1 /* climat */ = {
 			isa = PBXGroup;
 			children = (
+				2C867C4C20838A5700E1E8B3 /* service */,
 				2C6BAC002079770500C19E1B /* controller */,
 				2C6BABFF207976FC00C19E1B /* view */,
 				2C6BABFE207976EC00C19E1B /* model */,
@@ -110,6 +136,23 @@
 			path = controller;
 			sourceTree = "<group>";
 		};
+		2C867C4C20838A5700E1E8B3 /* service */ = {
+			isa = PBXGroup;
+			children = (
+				2C867C4D20838B2E00E1E8B3 /* WeatherAPI.swift */,
+			);
+			path = service;
+			sourceTree = "<group>";
+		};
+		2C867C542083974400E1E8B3 /* climatTests */ = {
+			isa = PBXGroup;
+			children = (
+				2C867C552083974400E1E8B3 /* climatTests.swift */,
+				2C867C572083974400E1E8B3 /* Info.plist */,
+			);
+			path = climatTests;
+			sourceTree = "<group>";
+		};
 		C46A51C34AF67BBF23CB7AC3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -141,6 +184,24 @@
 			productReference = 2C49C3F42079499B001825A1 /* climat.app */;
 			productType = "com.apple.product-type.application";
 		};
+		2C867C522083974400E1E8B3 /* climatTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2C867C5A2083974400E1E8B3 /* Build configuration list for PBXNativeTarget "climatTests" */;
+			buildPhases = (
+				2C867C4F2083974400E1E8B3 /* Sources */,
+				2C867C502083974400E1E8B3 /* Frameworks */,
+				2C867C512083974400E1E8B3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2C867C592083974400E1E8B3 /* PBXTargetDependency */,
+			);
+			name = climatTests;
+			productName = climatTests;
+			productReference = 2C867C532083974400E1E8B3 /* climatTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -153,6 +214,10 @@
 				TargetAttributes = {
 					2C49C3F32079499B001825A1 = {
 						CreatedOnToolsVersion = 9.3;
+					};
+					2C867C522083974400E1E8B3 = {
+						CreatedOnToolsVersion = 9.3;
+						TestTargetID = 2C49C3F32079499B001825A1;
 					};
 				};
 			};
@@ -170,6 +235,7 @@
 			projectRoot = "";
 			targets = (
 				2C49C3F32079499B001825A1 /* climat */,
+				2C867C522083974400E1E8B3 /* climatTests */,
 			);
 		};
 /* End PBXProject section */
@@ -183,6 +249,13 @@
 				2C49C3FF2079499C001825A1 /* Assets.xcassets in Resources */,
 				2C867C4A2082548000E1E8B3 /* sample-response.json in Resources */,
 				2C49C3FD2079499B001825A1 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2C867C512083974400E1E8B3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -252,12 +325,29 @@
 			buildActionMask = 2147483647;
 			files = (
 				2C49C3FA2079499B001825A1 /* ViewController.swift in Sources */,
+				2C867C4E20838B2E00E1E8B3 /* WeatherAPI.swift in Sources */,
 				2C49C3F82079499B001825A1 /* AppDelegate.swift in Sources */,
 				2C6BAC022079796E00C19E1B /* WeatherDataModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		2C867C4F2083974400E1E8B3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2C867C562083974400E1E8B3 /* climatTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		2C867C592083974400E1E8B3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2C49C3F32079499B001825A1 /* climat */;
+			targetProxy = 2C867C582083974400E1E8B3 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		2C49C3FB2079499B001825A1 /* Main.storyboard */ = {
@@ -433,6 +523,46 @@
 			};
 			name = Release;
 		};
+		2C867C5B2083974400E1E8B3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = C2WJGGKPPL;
+				INFOPLIST_FILE = climatTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.bytemethods.climatTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/climat.app/climat";
+			};
+			name = Debug;
+		};
+		2C867C5C2083974400E1E8B3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = C2WJGGKPPL;
+				INFOPLIST_FILE = climatTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.bytemethods.climatTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/climat.app/climat";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -450,6 +580,15 @@
 			buildConfigurations = (
 				2C49C4072079499C001825A1 /* Debug */,
 				2C49C4082079499C001825A1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2C867C5A2083974400E1E8B3 /* Build configuration list for PBXNativeTarget "climatTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2C867C5B2083974400E1E8B3 /* Debug */,
+				2C867C5C2083974400E1E8B3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
