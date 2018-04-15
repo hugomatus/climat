@@ -35,6 +35,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
   @IBOutlet weak var maxTempLabel: UILabel!
   @IBOutlet weak var sunRiseLabel: UILabel!
   @IBOutlet weak var sunSetLabel: UILabel!
+  @IBOutlet weak var windSpeedLabel: UILabel!
+  @IBOutlet weak var humidityLabel: UILabel!
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -128,6 +130,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
       weatherDataModel.tempMax = (json["main"]["temp_max"].double! - 273.15)
       weatherDataModel.humidity = (json["main"]["humidity"].int!)
       weatherDataModel.presure = (json["main"]["pressure"].int!)
+      weatherDataModel.windSpeed = (json["wind"]["speed"].double!)
       weatherDataModel.cityName = json["name"].stringValue
       weatherDataModel.weatherDescription = json["weather"][0]["description"].stringValue
       weatherDataModel.sunriseUTC = json["sys"]["sunrise"].int
@@ -162,8 +165,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     currentTempLabel.text = String(tempF)+" ℉"
     print("Weather Image \(String(describing: weatherDataModel.weatherIconImage))")
     weatherIconImage.image = weatherDataModel.weatherIconImage
-    minTempLabel.text = "min: \(Int(weatherDataModel.convertCelsiusToFahrenheit(tempInCelsius:weatherDataModel.tempMin!).rounded())) ℉"
-    maxTempLabel.text = "max: \(Int(weatherDataModel.convertCelsiusToFahrenheit(tempInCelsius:weatherDataModel.tempMax!).rounded())) ℉"
+    minTempLabel.text = "\(Int(weatherDataModel.convertCelsiusToFahrenheit(tempInCelsius:weatherDataModel.tempMin!).rounded())) ℉"
+    maxTempLabel.text = "\(Int(weatherDataModel.convertCelsiusToFahrenheit(tempInCelsius:weatherDataModel.tempMax!).rounded())) ℉"
     
     print("sunrise: \(String(describing: getReadableDate(timeStamp: TimeInterval(weatherDataModel.sunriseUTC!))))")
     
@@ -171,6 +174,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     
     
     sunSetLabel.text = getReadableDate(timeStamp: TimeInterval(weatherDataModel.sunsetTUC!))
+    
+    windSpeedLabel.text = "\(weatherDataModel.windSpeed!) m/h"
+    humidityLabel.text = "\(weatherDataModel.humidity!) %"
   }
   
   func getReadableDate(timeStamp: TimeInterval) -> String {
