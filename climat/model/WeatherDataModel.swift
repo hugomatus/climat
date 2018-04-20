@@ -70,6 +70,24 @@ class WeatherDataModel {
     return fahrenheit as Double
   }
   
+  func convertToCelsius(fahrenheit: Float) -> Float {
+    return (5.0 / 9.0 * ((fahrenheit) - 32.0))
+  }
+  
+  func KtoC(kelvin : Double)->Double{
+    
+    return kelvin-273.15
+  }
+  
+  func KtoF(kelvin : Double)->Double{
+    
+    return ((kelvin-273.15)*1.8)+32
+  }
+  
+  func KtoR(kelvin : Double)->Double{
+    
+    return ((kelvin-273.15)*1.8)+491.67
+  }
   
   func getWindDirection() -> String {
     

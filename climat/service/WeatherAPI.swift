@@ -14,19 +14,13 @@ import SwiftyJSON
 
 
 /**
- OpenWeather API
+ Service Facade: Fetches Weather Data from OpenWeatherAPI
  */
 final class WeatherAPI {
   
   let API_URL = "http://api.openweathermap.org/data/2.5/weather"
   let API_IMAGE_URL = "http://openweathermap.org/img/w/"
   let APP_ID = "f1f88a9acc94bde45346f66fb09a1804"
-  
-  let weatherDataModel : WeatherDataModel!
-  
-  init() {
-    weatherDataModel = WeatherDataModel()
-  }
   
   /**
    Fetches Weather Data and Parses the JSON string into a JSON object
@@ -37,7 +31,10 @@ final class WeatherAPI {
    
    - returns: The Response as a JSON object
    */
-  func getWeatherOpenWeatherData(parameters : [String : String], completionHandler:@escaping (_ payloadJSON: (JSON)) -> Void) {
+  func getWeatherOpenWeatherData(parameters : [String : String], completionHandler:@escaping (_ dataModel: (OpenWeatherDataModel)) -> Void) {
+    
+    let dataModel = OpenWeatherDataModel()
+    
     
     Alamofire.request(API_URL, method: .get, parameters: parameters).responseJSON {
       response in
@@ -45,46 +42,28 @@ final class WeatherAPI {
       guard response.result.error == nil else {
         print("error calling GET ")
         print(response.result.error!)
-        completionHandler("error calling GET ")
+        
+        dataModel.status = false
+        dataModel.errorMsg = "error calling GET"
+        completionHandler(dataModel)
         return
       }
       
       if (response.result.isSuccess) {
         print("Success! Got the Weather Data")
         let payload : JSON = JSON(response.result.value!)
-        print(payload)
-        self.parse(jsonData: payload)
-        self.getWeatherOpenWeatherDataImage(weatherIconImageName: ("\(String(describing: self.weatherDataModel.weatherIcon!)).png")) { (weatherIcon) in
-          self.weatherDataModel.weatherIconImage = weatherIcon
-          completionHandler(payload)
+        dataModel.parse(fromJson: payload)
+        self.getWeatherOpenWeatherDataImage(weatherIconImageName: ("\(String(describing: dataModel.weather[0].icon!)).png")) { (weatherIcon) in
+          dataModel.weatherIconImage = weatherIcon
+          completionHandler(dataModel)
         }
       } else {
-        completionHandler("Error occured while trying to parse data")
+        dataModel.status = false
+        dataModel.errorMsg = "Error occured while trying to parse data"
+        completionHandler(dataModel)
         print("Error\(response.error!)")
       }
       
-    }
-  }
-  
-  func parse(jsonData: JSON)  {
-    
-    if let tempResult = jsonData["main"]["temp"].double {
-      weatherDataModel.temp = (tempResult - 273.15)
-      weatherDataModel.tempMin = (jsonData["main"]["temp_min"].double! - 273.15)
-      weatherDataModel.tempMax = (jsonData["main"]["temp_max"].double! - 273.15)
-      weatherDataModel.humidity = (jsonData["main"]["humidity"].int!)
-      weatherDataModel.presure = (jsonData["main"]["pressure"].int!)
-      weatherDataModel.windSpeed = (jsonData["wind"]["speed"].double!)
-      weatherDataModel.windDeg = (jsonData["wind"]["deg"].double!)
-      
-      weatherDataModel.cityName = jsonData["name"].stringValue
-      weatherDataModel.weatherDescription = jsonData["weather"][0]["description"].stringValue
-      weatherDataModel.sunriseUTC = jsonData["sys"]["sunrise"].int
-      weatherDataModel.sunsetTUC = jsonData["sys"]["sunset"].int
-      
-      //weather condition codes - extract from API site
-      weatherDataModel.weatherId = jsonData["weather"][0]["id"].intValue
-      weatherDataModel.weatherIcon = jsonData["weather"][0]["icon"].stringValue
     }
   }
   
@@ -101,7 +80,6 @@ final class WeatherAPI {
       
       if let image = response.result.value {
         print("image downloaded: \(image)")
-        //self.weatherDataModel.weatherIconImage = image
         completionHandler(image)
       }
     }

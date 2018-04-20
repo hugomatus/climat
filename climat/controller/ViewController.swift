@@ -45,10 +45,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    
-    
     currentTimeFormatter.dateStyle = .full
-    
     dateTimeLabel.text = currentTimeFormatter.string(from: now)
     
     locationManager.delegate = self
@@ -80,37 +77,27 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
       
       let params : [String : String] = ["lat" : String(latitude), "lon" : String(longitude), "appid" : weatherAPI.APP_ID]
       
-      weatherAPI.getWeatherOpenWeatherData(parameters: params) { (payloadJSON) in
-        print(payloadJSON)
-       self.handleData(data: payloadJSON)
+      weatherAPI.getWeatherOpenWeatherData(parameters: params) { (dataModel) in
+        self.updateUIWithWeatherData(dataModel: dataModel)
       }
       
     }
   }
   
-  func handleData(data : JSON) {
-    print("Callback Handler \(data)")
-    weatherAPI.parse(jsonData: data)
-    updateUIWithWeatherData(weatherDataModel: weatherAPI.weatherDataModel)
-  }
-  
-  //MARK: - UI Updates
-  func updateUIWithWeatherData(weatherDataModel : WeatherDataModel) {
-     dateTimeLabel.text = currentTimeFormatter.string(from: now)
-    cityLabel.text = weatherDataModel.cityName
-    let tempF = Int(weatherDataModel.convertCelsiusToFahrenheit(tempInCelsius:weatherDataModel.temp!).rounded())
-    cityLabel.text = weatherDataModel.cityName
-    weatherDescription.text = weatherDataModel.weatherDescription?.capitalizingFirstLetter()
+  func updateUIWithWeatherData(dataModel : OpenWeatherDataModel) {
+    
+    cityLabel.text = dataModel.name
+    let tempF = Int(dataModel.KtoF(kelvin:dataModel.main.temp).rounded())
     currentTempLabel.text = String(tempF)+" ℉"
-    print("Weather Image \(String(describing: weatherDataModel.weatherIconImage))")
-    weatherIconImage.image = weatherDataModel.weatherIconImage
-    minTempLabel.text = "\(Int(weatherDataModel.convertCelsiusToFahrenheit(tempInCelsius:weatherDataModel.tempMin!).rounded())) ℉"
-    maxTempLabel.text = "\(Int(weatherDataModel.convertCelsiusToFahrenheit(tempInCelsius:weatherDataModel.tempMax!).rounded())) ℉"
-    sunRiseLabel.text = weatherAPI.getReadableDate(timeStamp: TimeInterval(weatherDataModel.sunriseUTC!))
-    sunSetLabel.text = weatherAPI.getReadableDate(timeStamp: TimeInterval(weatherDataModel.sunsetTUC!))
-    windSpeedLabel.text = "\(weatherDataModel.windSpeed!) m/h  \(weatherDataModel.getWindDirection())"
-    humidityLabel.text = "\(weatherDataModel.humidity!) %"
-    pressureLabel.text = "\(weatherDataModel.presure!) hpa"
+    weatherDescription.text = dataModel.weather[0].descriptionField?.capitalizingFirstLetter()
+    weatherIconImage.image = dataModel.weatherIconImage
+    minTempLabel.text = "\(Int(dataModel.KtoF(kelvin:dataModel.main.tempMin!).rounded())) ℉"
+    maxTempLabel.text = "\(Int(dataModel.KtoF(kelvin:dataModel.main.tempMax!).rounded())) ℉"
+    sunRiseLabel.text = weatherAPI.getReadableDate(timeStamp: TimeInterval(dataModel.sys.sunrise!))
+    sunSetLabel.text = weatherAPI.getReadableDate(timeStamp: TimeInterval(dataModel.sys.sunset!))
+    windSpeedLabel.text = "\(dataModel.wind.speed!) m/h"
+    humidityLabel.text = "\(dataModel.main.humidity!) %"
+    pressureLabel.text = "\(dataModel.main.pressure!) hpa"
   }
 }
 
