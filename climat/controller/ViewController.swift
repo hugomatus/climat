@@ -73,8 +73,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
       let latitude = location.coordinate.latitude
       let longitude = location.coordinate.longitude
       
-      print("logitude: \(longitude) lattitude: \(latitude)")
-      
       let params : [String : String] = ["lat" : String(latitude), "lon" : String(longitude), "appid" : weatherAPI.APP_ID]
       
       weatherAPI.getWeatherOpenWeatherData(parameters: params) { (dataModel) in

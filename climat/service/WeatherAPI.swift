@@ -79,7 +79,6 @@ final class WeatherAPI {
       debugPrint(response.result)
       
       if let image = response.result.value {
-        print("image downloaded: \(image)")
         completionHandler(image)
       }
     }
