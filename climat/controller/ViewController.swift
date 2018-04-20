@@ -89,15 +89,15 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     cityLabel.text = dataModel.name
     let tempF = Int(dataModel.KtoF(kelvin:dataModel.main.temp).rounded())
     currentTempLabel.text = String(tempF)+" ℉"
-    weatherDescription.text = dataModel.weather[0].descriptionField?.capitalizingFirstLetter()
+    weatherDescription.text = dataModel.weather[0].descriptionField.capitalizingFirstLetter()
     weatherIconImage.image = dataModel.weatherIconImage
     minTempLabel.text = "\(Int(dataModel.KtoF(kelvin:dataModel.main.tempMin!).rounded())) ℉"
     maxTempLabel.text = "\(Int(dataModel.KtoF(kelvin:dataModel.main.tempMax!).rounded())) ℉"
     sunRiseLabel.text = weatherAPI.getReadableDate(timeStamp: TimeInterval(dataModel.sys.sunrise!))
     sunSetLabel.text = weatherAPI.getReadableDate(timeStamp: TimeInterval(dataModel.sys.sunset!))
-    windSpeedLabel.text = "\(dataModel.wind.speed!) m/h"
+    windSpeedLabel.text = "\(dataModel.wind.speed!) m/h \(dataModel.getWindDirection(degrees: dataModel.wind.deg))"
     humidityLabel.text = "\(dataModel.main.humidity!) %"
-    pressureLabel.text = "\(dataModel.main.pressure!) hpa"
+    pressureLabel.text = "\(dataModel.main.pressure!) hpa)"
   }
 }
 
