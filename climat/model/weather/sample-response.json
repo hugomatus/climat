@@ -1,0 +1,42 @@
+{
+  "main" : {
+    "humidity" : 76,
+    "temp_min" : 284.14999999999998,
+    "temp_max" : 285.14999999999998,
+    "temp" : 284.29000000000002,
+    "pressure" : 1026
+  },
+  "name" : "West Linn",
+  "id" : 5760009,
+  "coord" : {
+    "lon" : -122.62,
+    "lat" : 45.359999999999999
+  },
+  "weather" : [
+               {
+               "main" : "Rain",
+               "icon" : "10d",
+               "description" : "light rain",
+               "id" : 500
+               }
+               ],
+  "clouds" : {
+    "all" : 90
+  },
+  "dt" : 1523717760,
+  "base" : "stations",
+  "sys" : {
+    "sunset" : 1523760975,
+    "sunrise" : 1523712339,
+    "message" : 0.0044000000000000003,
+    "id" : 2277,
+    "type" : 1,
+    "country" : "US"
+  },
+  "cod" : 200,
+  "visibility" : 16093,
+  "wind" : {
+    "deg" : 190,
+    "speed" : 4.5999999999999996
+  }
+}

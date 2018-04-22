@@ -12,9 +12,32 @@
 		2C49C3FD2079499B001825A1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C49C3FB2079499B001825A1 /* Main.storyboard */; };
 		2C49C3FF2079499C001825A1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C49C3FE2079499C001825A1 /* Assets.xcassets */; };
 		2C49C4022079499C001825A1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C49C4002079499C001825A1 /* LaunchScreen.storyboard */; };
+		2C867C4A2082548000E1E8B3 /* sample-response.json in Resources */ = {isa = PBXBuildFile; fileRef = 2C867C492082548000E1E8B3 /* sample-response.json */; };
+		2C867C4E20838B2E00E1E8B3 /* WeatherAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C867C4D20838B2E00E1E8B3 /* WeatherAPI.swift */; };
+		2C867C562083974400E1E8B3 /* climatTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C867C552083974400E1E8B3 /* climatTests.swift */; };
+		2CBF6114208B7A8000F7A7CB /* ChangeCityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CBF6113208B7A8000F7A7CB /* ChangeCityViewController.swift */; };
+		2CE6AA1420896F05004E00DC /* Coord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE6AA0D20896F05004E00DC /* Coord.swift */; };
+		2CE6AA1520896F05004E00DC /* Cloud.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE6AA0E20896F05004E00DC /* Cloud.swift */; };
+		2CE6AA1620896F05004E00DC /* Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE6AA0F20896F05004E00DC /* Main.swift */; };
+		2CE6AA1720896F05004E00DC /* Sy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE6AA1020896F05004E00DC /* Sy.swift */; };
+		2CE6AA1820896F05004E00DC /* Wind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE6AA1120896F05004E00DC /* Wind.swift */; };
+		2CE6AA1920896F05004E00DC /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE6AA1220896F05004E00DC /* Weather.swift */; };
+		2CE6AA1A20896F05004E00DC /* OpenWeatherDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE6AA1320896F05004E00DC /* OpenWeatherDataModel.swift */; };
+		3DFA76235ED4E075F0F1E0D6 /* Pods_climat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 428D62A289C0268CB7730CD3 /* Pods_climat.framework */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		2C867C582083974400E1E8B3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2C49C3EC2079499B001825A1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2C49C3F32079499B001825A1;
+			remoteInfo = climat;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		13364184D0440072B4120EAA /* Pods-climat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-climat.release.xcconfig"; path = "Pods/Target Support Files/Pods-climat/Pods-climat.release.xcconfig"; sourceTree = "<group>"; };
 		2C49C3F42079499B001825A1 /* climat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = climat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C49C3F72079499B001825A1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2C49C3F92079499B001825A1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -22,10 +45,33 @@
 		2C49C3FE2079499C001825A1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2C49C4012079499C001825A1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2C49C4032079499C001825A1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2C867C492082548000E1E8B3 /* sample-response.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "sample-response.json"; sourceTree = "<group>"; };
+		2C867C4D20838B2E00E1E8B3 /* WeatherAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherAPI.swift; sourceTree = "<group>"; };
+		2C867C532083974400E1E8B3 /* climatTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = climatTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2C867C552083974400E1E8B3 /* climatTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = climatTests.swift; sourceTree = "<group>"; };
+		2C867C572083974400E1E8B3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2CBF6113208B7A8000F7A7CB /* ChangeCityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeCityViewController.swift; sourceTree = "<group>"; };
+		2CE6AA0D20896F05004E00DC /* Coord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coord.swift; sourceTree = "<group>"; };
+		2CE6AA0E20896F05004E00DC /* Cloud.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cloud.swift; sourceTree = "<group>"; };
+		2CE6AA0F20896F05004E00DC /* Main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Main.swift; sourceTree = "<group>"; };
+		2CE6AA1020896F05004E00DC /* Sy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sy.swift; sourceTree = "<group>"; };
+		2CE6AA1120896F05004E00DC /* Wind.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Wind.swift; sourceTree = "<group>"; };
+		2CE6AA1220896F05004E00DC /* Weather.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
+		2CE6AA1320896F05004E00DC /* OpenWeatherDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpenWeatherDataModel.swift; sourceTree = "<group>"; };
+		3B567EBDF6ADEAA565BCDB4F /* Pods-climat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-climat.debug.xcconfig"; path = "Pods/Target Support Files/Pods-climat/Pods-climat.debug.xcconfig"; sourceTree = "<group>"; };
+		428D62A289C0268CB7730CD3 /* Pods_climat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_climat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		2C49C3F12079499B001825A1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3DFA76235ED4E075F0F1E0D6 /* Pods_climat.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2C867C502083974400E1E8B3 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -35,11 +81,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		18AFF87BDA2588F620983F7F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				3B567EBDF6ADEAA565BCDB4F /* Pods-climat.debug.xcconfig */,
+				13364184D0440072B4120EAA /* Pods-climat.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		2C49C3EB2079499B001825A1 = {
 			isa = PBXGroup;
 			children = (
 				2C49C3F62079499B001825A1 /* climat */,
+				2C867C542083974400E1E8B3 /* climatTests */,
 				2C49C3F52079499B001825A1 /* Products */,
+				18AFF87BDA2588F620983F7F /* Pods */,
+				C46A51C34AF67BBF23CB7AC3 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -47,6 +105,7 @@
 			isa = PBXGroup;
 			children = (
 				2C49C3F42079499B001825A1 /* climat.app */,
+				2C867C532083974400E1E8B3 /* climatTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -54,14 +113,81 @@
 		2C49C3F62079499B001825A1 /* climat */ = {
 			isa = PBXGroup;
 			children = (
-				2C49C3F72079499B001825A1 /* AppDelegate.swift */,
-				2C49C3F92079499B001825A1 /* ViewController.swift */,
-				2C49C3FB2079499B001825A1 /* Main.storyboard */,
+				2C867C4C20838A5700E1E8B3 /* service */,
+				2C6BAC002079770500C19E1B /* controller */,
+				2C6BABFF207976FC00C19E1B /* view */,
+				2C6BABFE207976EC00C19E1B /* model */,
 				2C49C3FE2079499C001825A1 /* Assets.xcassets */,
 				2C49C4002079499C001825A1 /* LaunchScreen.storyboard */,
 				2C49C4032079499C001825A1 /* Info.plist */,
 			);
 			path = climat;
+			sourceTree = "<group>";
+		};
+		2C4D2FE32088538B00F69EAB /* weather */ = {
+			isa = PBXGroup;
+			children = (
+				2C867C492082548000E1E8B3 /* sample-response.json */,
+				2CE6AA0E20896F05004E00DC /* Cloud.swift */,
+				2CE6AA0D20896F05004E00DC /* Coord.swift */,
+				2CE6AA0F20896F05004E00DC /* Main.swift */,
+				2CE6AA1320896F05004E00DC /* OpenWeatherDataModel.swift */,
+				2CE6AA1020896F05004E00DC /* Sy.swift */,
+				2CE6AA1220896F05004E00DC /* Weather.swift */,
+				2CE6AA1120896F05004E00DC /* Wind.swift */,
+			);
+			path = weather;
+			sourceTree = "<group>";
+		};
+		2C6BABFE207976EC00C19E1B /* model */ = {
+			isa = PBXGroup;
+			children = (
+				2C4D2FE32088538B00F69EAB /* weather */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		2C6BABFF207976FC00C19E1B /* view */ = {
+			isa = PBXGroup;
+			children = (
+				2C49C3FB2079499B001825A1 /* Main.storyboard */,
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
+		2C6BAC002079770500C19E1B /* controller */ = {
+			isa = PBXGroup;
+			children = (
+				2CBF6113208B7A8000F7A7CB /* ChangeCityViewController.swift */,
+				2C49C3F72079499B001825A1 /* AppDelegate.swift */,
+				2C49C3F92079499B001825A1 /* ViewController.swift */,
+			);
+			path = controller;
+			sourceTree = "<group>";
+		};
+		2C867C4C20838A5700E1E8B3 /* service */ = {
+			isa = PBXGroup;
+			children = (
+				2C867C4D20838B2E00E1E8B3 /* WeatherAPI.swift */,
+			);
+			path = service;
+			sourceTree = "<group>";
+		};
+		2C867C542083974400E1E8B3 /* climatTests */ = {
+			isa = PBXGroup;
+			children = (
+				2C867C552083974400E1E8B3 /* climatTests.swift */,
+				2C867C572083974400E1E8B3 /* Info.plist */,
+			);
+			path = climatTests;
+			sourceTree = "<group>";
+		};
+		C46A51C34AF67BBF23CB7AC3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				428D62A289C0268CB7730CD3 /* Pods_climat.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -71,9 +197,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2C49C4062079499C001825A1 /* Build configuration list for PBXNativeTarget "climat" */;
 			buildPhases = (
+				BAA9327D25C74734DFC3729B /* [CP] Check Pods Manifest.lock */,
 				2C49C3F02079499B001825A1 /* Sources */,
 				2C49C3F12079499B001825A1 /* Frameworks */,
 				2C49C3F22079499B001825A1 /* Resources */,
+				A195458647075AAF52DD6EA0 /* [CP] Embed Pods Frameworks */,
+				43C1A210B90CFF452DC0A5B4 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -83,6 +212,24 @@
 			productName = climat;
 			productReference = 2C49C3F42079499B001825A1 /* climat.app */;
 			productType = "com.apple.product-type.application";
+		};
+		2C867C522083974400E1E8B3 /* climatTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2C867C5A2083974400E1E8B3 /* Build configuration list for PBXNativeTarget "climatTests" */;
+			buildPhases = (
+				2C867C4F2083974400E1E8B3 /* Sources */,
+				2C867C502083974400E1E8B3 /* Frameworks */,
+				2C867C512083974400E1E8B3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2C867C592083974400E1E8B3 /* PBXTargetDependency */,
+			);
+			name = climatTests;
+			productName = climatTests;
+			productReference = 2C867C532083974400E1E8B3 /* climatTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -96,6 +243,10 @@
 				TargetAttributes = {
 					2C49C3F32079499B001825A1 = {
 						CreatedOnToolsVersion = 9.3;
+					};
+					2C867C522083974400E1E8B3 = {
+						CreatedOnToolsVersion = 9.3;
+						TestTargetID = 2C49C3F32079499B001825A1;
 					};
 				};
 			};
@@ -113,6 +264,7 @@
 			projectRoot = "";
 			targets = (
 				2C49C3F32079499B001825A1 /* climat */,
+				2C867C522083974400E1E8B3 /* climatTests */,
 			);
 		};
 /* End PBXProject section */
@@ -124,11 +276,77 @@
 			files = (
 				2C49C4022079499C001825A1 /* LaunchScreen.storyboard in Resources */,
 				2C49C3FF2079499C001825A1 /* Assets.xcassets in Resources */,
+				2C867C4A2082548000E1E8B3 /* sample-response.json in Resources */,
 				2C49C3FD2079499B001825A1 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		2C867C512083974400E1E8B3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		43C1A210B90CFF452DC0A5B4 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-climat/Pods-climat-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A195458647075AAF52DD6EA0 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-climat/Pods-climat-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-climat/Pods-climat-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BAA9327D25C74734DFC3729B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-climat-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		2C49C3F02079499B001825A1 /* Sources */ = {
@@ -136,11 +354,36 @@
 			buildActionMask = 2147483647;
 			files = (
 				2C49C3FA2079499B001825A1 /* ViewController.swift in Sources */,
+				2CE6AA1820896F05004E00DC /* Wind.swift in Sources */,
+				2CE6AA1920896F05004E00DC /* Weather.swift in Sources */,
+				2CE6AA1A20896F05004E00DC /* OpenWeatherDataModel.swift in Sources */,
+				2CE6AA1720896F05004E00DC /* Sy.swift in Sources */,
+				2CE6AA1620896F05004E00DC /* Main.swift in Sources */,
+				2C867C4E20838B2E00E1E8B3 /* WeatherAPI.swift in Sources */,
+				2CE6AA1420896F05004E00DC /* Coord.swift in Sources */,
+				2CBF6114208B7A8000F7A7CB /* ChangeCityViewController.swift in Sources */,
+				2CE6AA1520896F05004E00DC /* Cloud.swift in Sources */,
 				2C49C3F82079499B001825A1 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		2C867C4F2083974400E1E8B3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2C867C562083974400E1E8B3 /* climatTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		2C867C592083974400E1E8B3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2C49C3F32079499B001825A1 /* climat */;
+			targetProxy = 2C867C582083974400E1E8B3 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		2C49C3FB2079499B001825A1 /* Main.storyboard */ = {
@@ -278,11 +521,13 @@
 		};
 		2C49C4072079499C001825A1 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3B567EBDF6ADEAA565BCDB4F /* Pods-climat.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = C2WJGGKPPL;
 				INFOPLIST_FILE = climat/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -290,17 +535,19 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.bytemethods.climat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
 		2C49C4082079499C001825A1 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 13364184D0440072B4120EAA /* Pods-climat.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = C2WJGGKPPL;
 				INFOPLIST_FILE = climat/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -308,7 +555,47 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.bytemethods.climat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		2C867C5B2083974400E1E8B3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = C2WJGGKPPL;
+				INFOPLIST_FILE = climatTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.bytemethods.climatTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/climat.app/climat";
+			};
+			name = Debug;
+		};
+		2C867C5C2083974400E1E8B3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = C2WJGGKPPL;
+				INFOPLIST_FILE = climatTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.bytemethods.climatTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/climat.app/climat";
 			};
 			name = Release;
 		};
@@ -329,6 +616,15 @@
 			buildConfigurations = (
 				2C49C4072079499C001825A1 /* Debug */,
 				2C49C4082079499C001825A1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2C867C5A2083974400E1E8B3 /* Build configuration list for PBXNativeTarget "climatTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2C867C5B2083974400E1E8B3 /* Debug */,
+				2C867C5C2083974400E1E8B3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
