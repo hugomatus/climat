@@ -13,7 +13,7 @@ import Alamofire
 import AlamofireImage
 import SwiftyJSON
 
-class ViewController: UIViewController, CLLocationManagerDelegate {
+class ViewController: UIViewController, CLLocationManagerDelegate, ChangeCityDelegate {
   
   //  https://openweathermap.org/weather-conditions
   //  How to get icon URL
@@ -95,7 +95,37 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     sunSetLabel.text = weatherAPI.getReadableDate(timeStamp: TimeInterval(dataModel.sys.sunset!))
     windSpeedLabel.text = "\(dataModel.wind.speed!) m/h \(dataModel.getWindDirection(degrees: dataModel.wind.deg))"
     humidityLabel.text = "\(dataModel.main.humidity!) %"
-    pressureLabel.text = "\(dataModel.main.pressure!) hpa)"
+    pressureLabel.text = "\(dataModel.main.pressure!) hpa"
   }
+  
+  @IBAction func refreshButtonPressed(_ sender: UIBarButtonItem) {
+    
+    viewDidLoad()
+  }
+  
+  
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    
+    if segue.identifier == "changeCityName" {
+      
+      let destinationVC = segue.destination as! ChangeCityViewController
+      
+      destinationVC.delegate = self
+      
+    }
+    
+  }
+  
+  func userEnteredANewCityName(city: String) {
+    if !city.isNilOrEmpty {
+      let params : [String : String] = ["q" : city, "appid" : weatherAPI.APP_ID]
+      
+      weatherAPI.getWeatherOpenWeatherData(parameters: params) { (dataModel) in
+        self.updateUIWithWeatherData(dataModel: dataModel)
+      }
+    }
+    
+  }
+  
 }
 
