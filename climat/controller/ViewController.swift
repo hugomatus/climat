@@ -98,9 +98,13 @@ class ViewController: UIViewController, CLLocationManagerDelegate, ChangeCityDel
     pressureLabel.text = "\(dataModel.main.pressure!) hpa"
   }
   
+  @IBOutlet weak var forecastTableData: UITableView!
+  
   @IBAction func refreshButtonPressed(_ sender: UIBarButtonItem) {
     
     viewDidLoad()
+    
+    
   }
   
   
