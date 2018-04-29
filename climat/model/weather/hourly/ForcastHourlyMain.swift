@@ -6,7 +6,7 @@ import Foundation
 import SwiftyJSON
 
 
-class DataModelMain : NSObject, NSCoding{
+class ForcastHourlyMain : NSObject, NSCoding{
 
 	var grndLevel : Int!
 	var humidity : Int!

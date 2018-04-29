@@ -6,7 +6,7 @@ import Foundation
 import SwiftyJSON
 
 
-class DataModelCoord : NSObject, NSCoding{
+class ForecastHourlyCoord : NSObject, NSCoding{
 
 	var lat : Float!
 	var lon : Float!

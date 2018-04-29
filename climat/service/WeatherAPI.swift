@@ -67,13 +67,6 @@ extension Date: Dateable {
  */
 final class WeatherAPI {
   
-  let API_URL_CURRENT = "http://api.openweathermap.org/data/2.5/weather"
-  
-  let API_URL_FORECAST = "http://api.openweathermap.org/data/2.5/forecast?lat=35&lon=139"
-  
-  let API_IMAGE_URL = "http://openweathermap.org/img/w/"
-  let APP_ID = "f1f88a9acc94bde45346f66fb09a1804"
-  
   /**
    Fetches Weather Data and Parses the JSON string into a JSON object
    
@@ -133,12 +126,12 @@ final class WeatherAPI {
    
    - returns: The Response as a JSON object
    */
-  func getWeatherForeecastOpenWeatherData(parameters : [String : String], completionHandler:@escaping (_ dataModel: (DataModelOpenWeather)) -> Void) {
+  func getWeatherForecastOpenWeatherData(parameters : [String : String], completionHandler:@escaping (_ dataModel: (ForecastHourlyDataModel)) -> Void) {
     
-    let dataModel = DataModelOpenWeather()
+    let dataModel = ForecastHourlyDataModel()
     
     
-    Alamofire.request(APISearchType.forecast.rawValue, method: .get, parameters: parameters).responseJSON {
+    Alamofire.request(APISearchType.forecastHourly.rawValue, method: .get, parameters: parameters).responseJSON {
       response in
       
       guard response.result.error == nil else {
@@ -160,14 +153,6 @@ final class WeatherAPI {
         guard dataModel.list != nil && !dataModel.list.isEmpty else {
           return
         }
-        
-        //        self.getWeatherOpenWeatherDataImage(weatherIconImageName: ("\(String(describing: dataModel.weather[0].icon!)).png")) { (weatherIcon) in
-        //          dataModel.weatherIconImage = weatherIcon
-        //          completionHandler(dataModel)
-        //        }
-        
-        //let weatherIconImage = UIImage(named: "\(String(describing: dataModel.weather[0].icon!)).png")
-        //dataModel.weatherIconImage = weatherIconImage
         
         for index in 0...dataModel.list.count-1 {
           
@@ -215,7 +200,7 @@ final class WeatherAPI {
     if Calendar.current.isDateInTomorrow(date) {
      //return "Tomorrow"
       dateFormatter.dateFormat = "h:mm a"
-      return "Tomorrow \(dateFormatter.string(from: date))"
+      return "\(dateFormatter.string(from: date))"
     } else if Calendar.current.isDateInYesterday(date) {
       return "Yesterday"
       //dateFormatter.dateFormat = "h:mm a"

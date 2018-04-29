@@ -1,14 +1,14 @@
 //
-//	DataModelCloud.swift
+//	DataModelSy.swift
 //	Model file generated using JSONExport: https://github.com/Ahmed-Ali/JSONExport
 
 import Foundation 
 import SwiftyJSON
 
 
-class DataModelCloud : NSObject, NSCoding{
+class ForecastHourlySy : NSObject, NSCoding{
 
-	var all : Int!
+	var pod : String!
 
 
 	/**
@@ -18,7 +18,7 @@ class DataModelCloud : NSObject, NSCoding{
 		if json.isEmpty{
 			return
 		}
-		all = json["all"].intValue
+		pod = json["pod"].stringValue
 	}
 
 	/**
@@ -27,8 +27,8 @@ class DataModelCloud : NSObject, NSCoding{
 	func toDictionary() -> [String:Any]
 	{
 		var dictionary = [String:Any]()
-		if all != nil{
-			dictionary["all"] = all
+		if pod != nil{
+			dictionary["pod"] = pod
 		}
 		return dictionary
 	}
@@ -39,7 +39,7 @@ class DataModelCloud : NSObject, NSCoding{
     */
     @objc required init(coder aDecoder: NSCoder)
 	{
-         all = aDecoder.decodeObject(forKey: "all") as? Int
+         pod = aDecoder.decodeObject(forKey: "pod") as? String
 
 	}
 
@@ -49,8 +49,8 @@ class DataModelCloud : NSObject, NSCoding{
     */
     func encode(with aCoder: NSCoder)
 	{
-		if all != nil{
-			aCoder.encode(all, forKey: "all")
+		if pod != nil{
+			aCoder.encode(pod, forKey: "pod")
 		}
 
 	}

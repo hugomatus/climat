@@ -6,7 +6,7 @@ import Foundation
 import SwiftyJSON
 
 
-class DataModelSnow : NSObject, NSCoding{
+class ForecastHourlySnow : NSObject, NSCoding{
 
 
 

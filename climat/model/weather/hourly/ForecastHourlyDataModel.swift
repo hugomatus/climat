@@ -6,12 +6,12 @@ import Foundation
 import SwiftyJSON
 
 
-class DataModelOpenWeather {
+class ForecastHourlyDataModel {
 
-	var city : DataModelCity!
+	var city : ForecastHourlyCity!
 	var cnt : Int!
 	var cod : String!
-	var list : [DataModelList]!
+	var list : [ForcastHourlyList]!
 	var message : Float!
   var status: Bool = true
   var errorMsg: String = ""
@@ -27,14 +27,14 @@ class DataModelOpenWeather {
     }
     let cityJson = json["city"]
     if !cityJson.isEmpty{
-      city = DataModelCity(fromJson: cityJson)
+      city = ForecastHourlyCity(fromJson: cityJson)
     }
     cnt = json["cnt"].intValue
     cod = json["cod"].stringValue
-    list = [DataModelList]()
+    list = [ForcastHourlyList]()
     let listArray = json["list"].arrayValue
     for listJson in listArray{
-      let value = DataModelList(fromJson: listJson)
+      let value = ForcastHourlyList(fromJson: listJson)
       list.append(value)
     }
     message = json["message"].floatValue

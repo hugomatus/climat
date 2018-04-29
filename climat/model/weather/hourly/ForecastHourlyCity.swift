@@ -1,18 +1,18 @@
 //
-//	DataModelWeather.swift
+//	DataModelCity.swift
 //	Model file generated using JSONExport: https://github.com/Ahmed-Ali/JSONExport
 
 import Foundation 
 import SwiftyJSON
 
 
-class DataModelWeather : NSObject, NSCoding{
+class ForecastHourlyCity : NSObject, NSCoding{
 
-	var descriptionField : String!
-	var icon : String!
+	var coord : ForecastHourlyCoord!
+	var country : String!
 	var id : Int!
-	var main : String!
-  var weatherIconImage : UIImage!
+	var name : String!
+
 
 	/**
 	 * Instantiate the instance using the passed json values to set the properties values
@@ -21,10 +21,13 @@ class DataModelWeather : NSObject, NSCoding{
 		if json.isEmpty{
 			return
 		}
-		descriptionField = json["description"].stringValue
-		icon = json["icon"].stringValue
+		let coordJson = json["coord"]
+		if !coordJson.isEmpty{
+			coord = ForecastHourlyCoord(fromJson: coordJson)
+		}
+		country = json["country"].stringValue
 		id = json["id"].intValue
-		main = json["main"].stringValue
+		name = json["name"].stringValue
 	}
 
 	/**
@@ -33,17 +36,17 @@ class DataModelWeather : NSObject, NSCoding{
 	func toDictionary() -> [String:Any]
 	{
 		var dictionary = [String:Any]()
-		if descriptionField != nil{
-			dictionary["description"] = descriptionField
+		if coord != nil{
+			dictionary["coord"] = coord.toDictionary()
 		}
-		if icon != nil{
-			dictionary["icon"] = icon
+		if country != nil{
+			dictionary["country"] = country
 		}
 		if id != nil{
 			dictionary["id"] = id
 		}
-		if main != nil{
-			dictionary["main"] = main
+		if name != nil{
+			dictionary["name"] = name
 		}
 		return dictionary
 	}
@@ -54,10 +57,10 @@ class DataModelWeather : NSObject, NSCoding{
     */
     @objc required init(coder aDecoder: NSCoder)
 	{
-         descriptionField = aDecoder.decodeObject(forKey: "description") as? String
-         icon = aDecoder.decodeObject(forKey: "icon") as? String
+         coord = aDecoder.decodeObject(forKey: "coord") as? ForecastHourlyCoord
+         country = aDecoder.decodeObject(forKey: "country") as? String
          id = aDecoder.decodeObject(forKey: "id") as? Int
-         main = aDecoder.decodeObject(forKey: "main") as? String
+         name = aDecoder.decodeObject(forKey: "name") as? String
 
 	}
 
@@ -67,17 +70,17 @@ class DataModelWeather : NSObject, NSCoding{
     */
     func encode(with aCoder: NSCoder)
 	{
-		if descriptionField != nil{
-			aCoder.encode(descriptionField, forKey: "description")
+		if coord != nil{
+			aCoder.encode(coord, forKey: "coord")
 		}
-		if icon != nil{
-			aCoder.encode(icon, forKey: "icon")
+		if country != nil{
+			aCoder.encode(country, forKey: "country")
 		}
 		if id != nil{
 			aCoder.encode(id, forKey: "id")
 		}
-		if main != nil{
-			aCoder.encode(main, forKey: "main")
+		if name != nil{
+			aCoder.encode(name, forKey: "name")
 		}
 
 	}

@@ -62,6 +62,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate, ChangeCityDel
   
   @IBOutlet var forecastWeatherConditionTextView: [UITextView]!
   
+  @IBOutlet var forecastWeatherConditionTimeLabel: [UILabel]!
+  
+  
   let now = Date()
   let calendar = Calendar.current
   let currentTimeFormatter = DateFormatter()
@@ -97,11 +100,12 @@ class ViewController: UIViewController, CLLocationManagerDelegate, ChangeCityDel
       let latitude = location.coordinate.latitude
       let longitude = location.coordinate.longitude
       
-      let params : [String : String] = ["lat" : String(latitude), "lon" : String(longitude), "appid" : weatherAPI.APP_ID]
+      let params : [String : String] = ["lat" : String(latitude), "lon" : String(longitude), "appid" : APISearchType.apiKey.rawValue]
       
       fetchWeatherCurrent(params)
       
       fetchWeatherForecast(params)
+      // api.openweathermap.org/data/2.5/forecast/daily?lat=35&lon=139&cnt=10
     }
   }
   
@@ -126,8 +130,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, ChangeCityDel
   @IBAction func refreshButtonPressed(_ sender: UIBarButtonItem) {
     
     viewDidLoad()
-    
-    
+
   }
   
   
@@ -145,9 +148,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate, ChangeCityDel
   
   func userEnteredANewCityName(city: String) {
     if !city.isNilOrEmpty {
-      let params : [String : String] = ["q" : city, "appid" : weatherAPI.APP_ID]
+      let params : [String : String] = ["q" : city, "appid" : APISearchType.apiKey.rawValue]
       
-     
+      
       fetchWeatherCurrent(params)
       
       fetchWeatherForecast(params)
@@ -174,14 +177,20 @@ class ViewController: UIViewController, CLLocationManagerDelegate, ChangeCityDel
   }
   
   fileprivate func fetchWeatherForecast(_ params: [String : String]) {
-    weatherAPI.getWeatherForeecastOpenWeatherData(parameters: params) { (dataModel) in
+    weatherAPI.getWeatherForecastOpenWeatherData(parameters: params) { (dataModel) in
       for index in 0...7 {
         self.forecastWeatherIconImage[index].image = dataModel.list[index].weather[0].weatherIconImage
         
-        let v = self.weatherAPI.getReadableDate(timeStamp:TimeInterval(dataModel.list[index].dt))
+        let dateTimeOfForecast = self.weatherAPI.getReadableDate(timeStamp:TimeInterval(dataModel.list[index].dt))
+        
+        let timeForecast = dateTimeOfForecast.split(separator: " ")[0].split(separator: ":")[0]
+        let amPMTimeForecast = dateTimeOfForecast.split(separator: " ")[1]
+        
+        self.forecastWeatherConditionTimeLabel[index].text = "\(timeForecast)\(amPMTimeForecast)"
+        
         self.forecastWeatherConditionTextView[index].text =
           
-        "\(dataModel.list[index].weather[0].descriptionField!)\n\(Int(dataModel.KtoF(kelvin: Float(dataModel.list[index].main.temp))))℉\n\(dataModel.list[index].wind.speed!) m/h \(dataModel.getWindDirection(degrees: Float(dataModel.list[index].wind.deg)))\nhumidity: \(dataModel.list[index].main.humidity!)%\n\(v)"
+        "\(Int(dataModel.KtoF(kelvin: Float(dataModel.list[index].main.temp))))℉"
       }
     }
   }

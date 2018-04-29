@@ -6,7 +6,7 @@ import Foundation
 import SwiftyJSON
 
 
-class DataModelWind : NSObject, NSCoding{
+class ForecastHourlyWind : NSObject, NSCoding{
 
 	var deg : Float!
 	var speed : Float!

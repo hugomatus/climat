@@ -11,7 +11,9 @@ import Foundation
 enum APISearchType: String {
   
   case currentWeather = "http://api.openweathermap.org/data/2.5/weather"
-  case forecast = "http://api.openweathermap.org/data/2.5/forecast"
+  case forecastHourly = "http://api.openweathermap.org/data/2.5/forecast"
+  case forecastDaily = "http://api.openweathermap.org/data/2.5/forecast/daily"
   case imageSearch = "http://openweathermap.org/img/w/"
+  case apiKey = "f1f88a9acc94bde45346f66fb09a1804"
   //b410567cd9e39037 weather underground
 }

@@ -6,16 +6,16 @@ import Foundation
 import SwiftyJSON
 
 
-class DataModelList : NSObject, NSCoding{
+class ForcastHourlyList : NSObject, NSCoding{
 
-	var clouds : DataModelCloud!
+	var clouds : ForecastHourlyCloud!
 	var dt : Int!
 	var dtTxt : String!
-	var main : DataModelMain!
-	var snow : DataModelSnow!
-	var sys : DataModelSy!
-	var weather : [DataModelWeather]!
-	var wind : DataModelWind!
+	var main : ForcastHourlyMain!
+	var snow : ForecastHourlySnow!
+	var sys : ForecastHourlySy!
+	var weather : [ForecastHourlyWeather]!
+	var wind : ForecastHourlyWind!
 
 
 	/**
@@ -27,31 +27,31 @@ class DataModelList : NSObject, NSCoding{
 		}
 		let cloudsJson = json["clouds"]
 		if !cloudsJson.isEmpty{
-			clouds = DataModelCloud(fromJson: cloudsJson)
+			clouds = ForecastHourlyCloud(fromJson: cloudsJson)
 		}
 		dt = json["dt"].intValue
 		dtTxt = json["dt_txt"].stringValue
 		let mainJson = json["main"]
 		if !mainJson.isEmpty{
-			main = DataModelMain(fromJson: mainJson)
+			main = ForcastHourlyMain(fromJson: mainJson)
 		}
 		let snowJson = json["snow"]
 		if !snowJson.isEmpty{
-			snow = DataModelSnow(fromJson: snowJson)
+			snow = ForecastHourlySnow(fromJson: snowJson)
 		}
 		let sysJson = json["sys"]
 		if !sysJson.isEmpty{
-			sys = DataModelSy(fromJson: sysJson)
+			sys = ForecastHourlySy(fromJson: sysJson)
 		}
-		weather = [DataModelWeather]()
+		weather = [ForecastHourlyWeather]()
 		let weatherArray = json["weather"].arrayValue
 		for weatherJson in weatherArray{
-			let value = DataModelWeather(fromJson: weatherJson)
+			let value = ForecastHourlyWeather(fromJson: weatherJson)
 			weather.append(value)
 		}
 		let windJson = json["wind"]
 		if !windJson.isEmpty{
-			wind = DataModelWind(fromJson: windJson)
+			wind = ForecastHourlyWind(fromJson: windJson)
 		}
 	}
 
@@ -98,14 +98,14 @@ class DataModelList : NSObject, NSCoding{
     */
     @objc required init(coder aDecoder: NSCoder)
 	{
-         clouds = aDecoder.decodeObject(forKey: "clouds") as? DataModelCloud
+         clouds = aDecoder.decodeObject(forKey: "clouds") as? ForecastHourlyCloud
          dt = aDecoder.decodeObject(forKey: "dt") as? Int
          dtTxt = aDecoder.decodeObject(forKey: "dt_txt") as? String
-         main = aDecoder.decodeObject(forKey: "main") as? DataModelMain
-         snow = aDecoder.decodeObject(forKey: "snow") as? DataModelSnow
-         sys = aDecoder.decodeObject(forKey: "sys") as? DataModelSy
-         weather = aDecoder.decodeObject(forKey: "weather") as? [DataModelWeather]
-         wind = aDecoder.decodeObject(forKey: "wind") as? DataModelWind
+         main = aDecoder.decodeObject(forKey: "main") as? ForcastHourlyMain
+         snow = aDecoder.decodeObject(forKey: "snow") as? ForecastHourlySnow
+         sys = aDecoder.decodeObject(forKey: "sys") as? ForecastHourlySy
+         weather = aDecoder.decodeObject(forKey: "weather") as? [ForecastHourlyWeather]
+         wind = aDecoder.decodeObject(forKey: "wind") as? ForecastHourlyWind
 
 	}
 
