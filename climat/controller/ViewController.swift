@@ -13,6 +13,22 @@ import Alamofire
 import AlamofireImage
 import SwiftyJSON
 
+extension Date {
+  static func getFormattedDate(string: String ) -> String{
+    
+    //, formatter:String
+    let dateFormatterGet = DateFormatter()
+    dateFormatterGet.dateFormat = "yyyy-MM-dd'T'HH:mm:ss+hh:mm"
+    
+    let dateFormatterPrint = DateFormatter()
+    dateFormatterPrint.dateFormat = "MMM dd,yyyy"
+    
+    let date: Date? = dateFormatterGet.date(from: string)
+    print("Date",dateFormatterPrint.string(from: date!)) // Feb 01,2018
+    return dateFormatterPrint.string(from: date!);
+  }
+}
+
 class ViewController: UIViewController, CLLocationManagerDelegate, ChangeCityDelegate {
   
   //  https://openweathermap.org/weather-conditions
@@ -37,6 +53,14 @@ class ViewController: UIViewController, CLLocationManagerDelegate, ChangeCityDel
   @IBOutlet weak var pressureLabel: UILabel!
   @IBOutlet weak var dateTimeLabel: UILabel!
   
+  @IBOutlet weak var row1DateTime: UILabel!
+  @IBOutlet weak var row1IconImg: UIImageView!
+  @IBOutlet weak var row1WeatherForecast: UILabel!
+  
+  @IBOutlet var forecastWeatherIconImage: [UIImageView]!
+  
+  
+  @IBOutlet var forecastWeatherConditionTextView: [UITextView]!
   
   let now = Date()
   let calendar = Calendar.current
@@ -75,10 +99,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate, ChangeCityDel
       
       let params : [String : String] = ["lat" : String(latitude), "lon" : String(longitude), "appid" : weatherAPI.APP_ID]
       
-      weatherAPI.getWeatherOpenWeatherData(parameters: params) { (dataModel) in
-        self.updateUIWithWeatherData(dataModel: dataModel)
-      }
+      fetchWeatherCurrent(params)
       
+      fetchWeatherForecast(params)
     }
   }
   
@@ -124,12 +147,43 @@ class ViewController: UIViewController, CLLocationManagerDelegate, ChangeCityDel
     if !city.isNilOrEmpty {
       let params : [String : String] = ["q" : city, "appid" : weatherAPI.APP_ID]
       
-      weatherAPI.getWeatherOpenWeatherData(parameters: params) { (dataModel) in
-        self.updateUIWithWeatherData(dataModel: dataModel)
-      }
+     
+      fetchWeatherCurrent(params)
+      
+      fetchWeatherForecast(params)
     }
     
   }
   
+  func formatDateString(value: String) -> String {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateStyle = .medium
+    dateFormatter.timeStyle = .none
+    dateFormatter.locale = Locale(identifier: "en_US")
+    
+    let t = dateFormatter.date(from: value)
+    print(t!)// Jan 2, 2001
+    
+    return "\(t!)"
+  }
+  
+  fileprivate func fetchWeatherCurrent(_ params: [String : String]) {
+    weatherAPI.getWeatherOpenWeatherData(parameters: params) { (dataModel) in
+      self.updateUIWithWeatherData(dataModel: dataModel)
+    }
+  }
+  
+  fileprivate func fetchWeatherForecast(_ params: [String : String]) {
+    weatherAPI.getWeatherForeecastOpenWeatherData(parameters: params) { (dataModel) in
+      for index in 0...7 {
+        self.forecastWeatherIconImage[index].image = dataModel.list[index].weather[0].weatherIconImage
+        
+        let v = self.weatherAPI.getReadableDate(timeStamp:TimeInterval(dataModel.list[index].dt))
+        self.forecastWeatherConditionTextView[index].text =
+          
+        "\(dataModel.list[index].weather[0].descriptionField!)\n\(Int(dataModel.KtoF(kelvin: Float(dataModel.list[index].main.temp))))℉\n\(dataModel.list[index].wind.speed!) m/h \(dataModel.getWindDirection(degrees: Float(dataModel.list[index].wind.deg)))\nhumidity: \(dataModel.list[index].main.humidity!)%\n\(v)"
+      }
+    }
+  }
 }
 
