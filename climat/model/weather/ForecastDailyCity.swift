@@ -1,19 +1,22 @@
 //
-//	DataModelCity.swift
+//	ForecastDailyCity.swift
 //  Created by Hugo  Matus on 4/18/18.
 //  Copyright © 2018 Hugo  Matus. All rights reserved.
-//
 
 import Foundation 
 import SwiftyJSON
 
 
-class ForecastHourlyCity {
+class ForecastDailyCity {
 
-	var coord : ForecastHourlyCoord!
 	var country : String!
-	var id : Int!
+	var geonameId : Int!
+	var iso2 : String!
+	var lat : Float!
+	var lon : Float!
 	var name : String!
+	var population : Int!
+	var type : String!
 
 
 	/**
@@ -23,12 +26,13 @@ class ForecastHourlyCity {
 		if json.isEmpty{
 			return
 		}
-		let coordJson = json["coord"]
-		if !coordJson.isEmpty{
-			coord = ForecastHourlyCoord(fromJson: coordJson)
-		}
 		country = json["country"].stringValue
-		id = json["id"].intValue
+		geonameId = json["geoname_id"].intValue
+		iso2 = json["iso2"].stringValue
+		lat = json["lat"].floatValue
+		lon = json["lon"].floatValue
 		name = json["name"].stringValue
+		population = json["population"].intValue
+		type = json["type"].stringValue
 	}
 }

@@ -1,19 +1,19 @@
 //
-//	DataModelCity.swift
+//	ForecastDailyWeather.swift
 //  Created by Hugo  Matus on 4/18/18.
 //  Copyright © 2018 Hugo  Matus. All rights reserved.
-//
 
 import Foundation 
 import SwiftyJSON
 
 
-class ForecastHourlyCity {
+class ForecastDailyWeather {
 
-	var coord : ForecastHourlyCoord!
-	var country : String!
+	var descriptionField : String!
+	var icon : String!
 	var id : Int!
-	var name : String!
+	var main : String!
+  var weatherIconImage : UIImage!
 
 
 	/**
@@ -23,12 +23,9 @@ class ForecastHourlyCity {
 		if json.isEmpty{
 			return
 		}
-		let coordJson = json["coord"]
-		if !coordJson.isEmpty{
-			coord = ForecastHourlyCoord(fromJson: coordJson)
-		}
-		country = json["country"].stringValue
+		descriptionField = json["description"].stringValue
+		icon = json["icon"].stringValue
 		id = json["id"].intValue
-		name = json["name"].stringValue
+		main = json["main"].stringValue
 	}
 }

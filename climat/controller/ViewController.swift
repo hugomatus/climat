@@ -13,55 +13,12 @@ import Alamofire
 import AlamofireImage
 import SwiftyJSON
 
-extension DateFormatter {
-  
-  convenience init (format: String) {
-    self.init()
-    dateFormat = format
-    locale = Locale.current
-  }
-}
-
-extension String {
-  
-  func toDate (format: String) -> Date? {
-    return DateFormatter(format: format).date(from: self)
-  }
-  
-  func toDateString (inputFormat: String, outputFormat:String) -> String? {
-    if let date = toDate(format: inputFormat) {
-      return DateFormatter(format: outputFormat).string(from: date)
-    }
-    return nil
-  }
-}
-
-extension Date {
-  
-  func toString (format:String) -> String? {
-    return DateFormatter(format: format).string(from: self)
-  }
-  
-  func dayOfWeek() -> String? {
-    let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = "EEEE"
-    return dateFormatter.string(from: self).capitalized
-    // or use capitalized(with: locale) if you want
-  }
-}
-
-
 class ViewController: UIViewController, CLLocationManagerDelegate, ChangeCityDelegate {
-  
-  //  https://openweathermap.org/weather-conditions
-  //  How to get icon URL
-  //  For code 501 - moderate rain icon = "10d"
-  //  URL is
-  //  http://openweathermap.org/img/w/10d.png
   
   let weatherAPI = WeatherAPI()
   let locationManager = CLLocationManager()
   
+  //Current Weather
   @IBOutlet weak var cityLabel: UILabel!
   @IBOutlet weak var weatherDescription: UILabel!
   @IBOutlet weak var weatherIconImage: UIImageView!
@@ -70,36 +27,24 @@ class ViewController: UIViewController, CLLocationManagerDelegate, ChangeCityDel
   @IBOutlet weak var maxTempLabel: UILabel!
   @IBOutlet weak var sunRiseLabel: UILabel!
   @IBOutlet weak var sunSetLabel: UILabel!
-  @IBOutlet weak var windSpeedLabel: UILabel!
-  @IBOutlet weak var humidityLabel: UILabel!
-  @IBOutlet weak var pressureLabel: UILabel!
   @IBOutlet weak var dateTimeLabel: UILabel!
   
-  @IBOutlet weak var row1DateTime: UILabel!
-  @IBOutlet weak var row1IconImg: UIImageView!
-  @IBOutlet weak var row1WeatherForecast: UILabel!
-  
-  @IBOutlet var forecastWeatherIconImage: [UIImageView]!
-  
-  
-  @IBOutlet var forecastWeatherConditionTextView: [UITextView]!
-  
+  //Hourly Forecast
   @IBOutlet var forecastWeatherConditionTimeLabel: [UILabel]!
+  @IBOutlet var forecastWeatherIconImage: [UIImageView]!
+  @IBOutlet var forecastWeatherIconIConditionLabel: [UILabel]!
   
+  //Daily Forecast
   @IBOutlet var forecastWeatherDailyDayLabel: [UILabel]!
-  
   @IBOutlet var forecastWeatherDailyIconImage: [UIImageView]!
-  
   @IBOutlet var forecastWeatherDailyMinTempLabel: [UILabel]!
-  
   @IBOutlet var forecastWeatherDailyMaxTempLabel: [UILabel]!
-  
-  let now = Date()
-  let calendar = Calendar.current
-  let currentTimeFormatter = DateFormatter()
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    let now = Date()
+    let currentTimeFormatter = DateFormatter()
     
     currentTimeFormatter.dateStyle = .full
     dateTimeLabel.text = currentTimeFormatter.string(from: now)
@@ -133,12 +78,11 @@ class ViewController: UIViewController, CLLocationManagerDelegate, ChangeCityDel
       
       fetchWeatherCurrent(params)
       
-      fetchWeatherForecast(params)
+      fetchWeatherForecastHourly(params)
       
       let params2 : [String : String] = ["lat" : String(latitude), "lon" : String(longitude), "appid" : APISearchType.apiKey.rawValue, "cnt":"6"]
       
       fetchWeatherForecastDaily(params2)
-      // api.openweathermap.org/data/2.5/forecast/daily?lat=35&lon=139&cnt=10
     }
   }
   
@@ -153,9 +97,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate, ChangeCityDel
     maxTempLabel.text = "\(Int(dataModel.KtoF(kelvin:dataModel.main.tempMax!).rounded())) ℉"
     sunRiseLabel.text = weatherAPI.getReadableDate(timeStamp: TimeInterval(dataModel.sys.sunrise!))
     sunSetLabel.text = weatherAPI.getReadableDate(timeStamp: TimeInterval(dataModel.sys.sunset!))
-    windSpeedLabel.text = "\(dataModel.wind.speed!) m/h \(dataModel.getWindDirection(degrees: dataModel.wind.deg))"
-    humidityLabel.text = "\(dataModel.main.humidity!) %"
-    pressureLabel.text = "\(dataModel.main.pressure!) hpa"
   }
   
   @IBOutlet weak var forecastTableData: UITableView!
@@ -176,31 +117,20 @@ class ViewController: UIViewController, CLLocationManagerDelegate, ChangeCityDel
       destinationVC.delegate = self
       
     }
-    
   }
   
   func userEnteredANewCityName(city: String) {
     if !city.isNilOrEmpty {
-      let params : [String : String] = ["q" : city, "appid" : APISearchType.apiKey.rawValue]
       
+      let params : [String : String] = ["q" : city, "appid" : APISearchType.apiKey.rawValue]
       
       fetchWeatherCurrent(params)
       
-      fetchWeatherForecast(params)
+      fetchWeatherForecastHourly(params)
+      
+      fetchWeatherForecastDaily(params)
     }
     
-  }
-  
-  func formatDateString(value: String) -> String {
-    let dateFormatter = DateFormatter()
-    dateFormatter.dateStyle = .medium
-    dateFormatter.timeStyle = .none
-    dateFormatter.locale = Locale(identifier: "en_US")
-    
-    let t = dateFormatter.date(from: value)
-    print(t!)// Jan 2, 2001
-    
-    return "\(t!)"
   }
   
   fileprivate func fetchWeatherCurrent(_ params: [String : String]) {
@@ -209,11 +139,12 @@ class ViewController: UIViewController, CLLocationManagerDelegate, ChangeCityDel
     }
   }
   
-  fileprivate func fetchWeatherForecast(_ params: [String : String]) {
+  fileprivate func fetchWeatherForecastHourly(_ params: [String : String]) {
     weatherAPI.getWeatherForecastHourly(parameters: params) { (dataModel) in
       for index in 0...5 {
+      
         self.forecastWeatherIconImage[index].image = dataModel.list[index].weather[0].weatherIconImage
-        
+      
         let dateTimeOfForecast = self.weatherAPI.getReadableDate(timeStamp:TimeInterval(dataModel.list[index].dt))
         
         let timeForecast = dateTimeOfForecast.split(separator: " ")[0].split(separator: ":")[0]
@@ -221,9 +152,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate, ChangeCityDel
         
         self.forecastWeatherConditionTimeLabel[index].text = "\(timeForecast)\(amPMTimeForecast)"
         
-        self.forecastWeatherConditionTextView[index].text =
+        self.forecastWeatherIconIConditionLabel[index].text =
           
-        "\(Int(dataModel.KtoF(kelvin: Float(dataModel.list[index].main.temp))))℉"
+        "\(Int(self.weatherAPI.KtoF(kelvin: Float(dataModel.list[index].main.temp))))℉"
       }
     }
   }
@@ -231,29 +162,20 @@ class ViewController: UIViewController, CLLocationManagerDelegate, ChangeCityDel
   fileprivate func fetchWeatherForecastDaily(_ params: [String : String]) {
     weatherAPI.getWeatherForecastDaily(parameters: params) { (dataModel) in
       for index in 0...5 {
-        self.forecastWeatherIconImage[index].image = dataModel.list[index].weather[0].weatherIconImage
         
+        self.forecastWeatherIconImage[index].image = dataModel.list[index].weather[0].weatherIconImage
         
         self.forecastWeatherDailyDayLabel[index].text = self.weatherAPI.getDay(timeStamp: TimeInterval(dataModel.list[index].dt))
         
         self.forecastWeatherDailyMinTempLabel[index].text =
           
-        "\(Int(dataModel.KtoF(kelvin: Float(dataModel.list[index].main.tempMin))))℉"
+        "\(Int(self.weatherAPI.KtoF(kelvin: Float(dataModel.list[index].temp.min))))℉"
         
         self.forecastWeatherDailyMaxTempLabel[index].text =
           
-        "\(Int(dataModel.KtoF(kelvin: Float(dataModel.list[index].main.tempMax))))℉"
+        "\(Int(self.weatherAPI.KtoF(kelvin: Float(dataModel.list[index].temp.max))))℉"
       }
     }
-  }
-  
-  func getDayNameBy(stringDate: String) -> String
-  {
-    let df  = DateFormatter()
-    df.dateFormat = "YYYY-MM-dd"
-    let date = df.date(from: stringDate)!
-    df.dateFormat = "EEEE"
-    return df.string(from: date);
   }
 }
 

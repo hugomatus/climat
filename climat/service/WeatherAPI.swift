@@ -98,6 +98,9 @@ final class WeatherAPI {
         print("Success! Got the Weather Data")
         
         let payload : JSON = JSON(response.result.value!)
+        print("----------------START CURRENT CURRENT-----------------------")
+        print(payload)
+        print("----------------START CURRENT CURRENT-----------------------")
         dataModel.parse(fromJson: payload)
         print(payload.stringValue)
         guard dataModel.weather != nil && !dataModel.weather.isEmpty else {
@@ -148,6 +151,9 @@ final class WeatherAPI {
         print("Success! Got the Weather Data")
         
         let payload : JSON = JSON(response.result.value!)
+        print("----------------START HOURLY HOURLY-----------------------")
+        print(payload)
+        print("----------------END HOURLY HOURLY-----------------------")
         dataModel.parse(fromJson: payload)
         
         guard dataModel.list != nil && !dataModel.list.isEmpty else {
@@ -189,7 +195,7 @@ final class WeatherAPI {
     let dataModel = ForecastDailyDataModel()
     
     
-    Alamofire.request(APISearchType.forecastHourly.rawValue, method: .get, parameters: parameters).responseJSON {
+    Alamofire.request(APISearchType.forecastDaily.rawValue, method: .get, parameters: parameters).responseJSON {
       response in
       
       guard response.result.error == nil else {
@@ -206,7 +212,9 @@ final class WeatherAPI {
         print("Success! Got the Weather Data")
         
         let payload : JSON = JSON(response.result.value!)
+        print("----------------START DAILY DAILY-----------------------")
         print(payload)
+        print("----------------END DAILY DAILY-----------------------")
         dataModel.parse(fromJson: payload)
         
         guard dataModel.list != nil && !dataModel.list.isEmpty else {
@@ -285,6 +293,7 @@ final class WeatherAPI {
     return dateFormatter.string(from: date)
     
   }
+  
   func dateFallsInCurrentWeek(date: Date) -> Bool {
     let currentWeek = Calendar.current.component(Calendar.Component.weekOfYear, from: Date())
     let datesWeek = Calendar.current.component(Calendar.Component.weekOfYear, from: date)
