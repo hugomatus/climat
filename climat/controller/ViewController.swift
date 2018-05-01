@@ -34,12 +34,14 @@ class ViewController: UIViewController, CLLocationManagerDelegate, ChangeCityDel
   @IBOutlet var forecastWeatherIconImage: [UIImageView]!
   @IBOutlet var forecastWeatherIconIConditionLabel: [UILabel]!
   
+  
   //Daily Forecast
   @IBOutlet var forecastWeatherDailyDayLabel: [UILabel]!
   @IBOutlet var forecastWeatherDailyIconImage: [UIImageView]!
   @IBOutlet var forecastWeatherDailyMinTempLabel: [UILabel]!
   @IBOutlet var forecastWeatherDailyMaxTempLabel: [UILabel]!
   
+
   override func viewDidLoad() {
     super.viewDidLoad()
     
