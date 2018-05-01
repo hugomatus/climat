@@ -76,7 +76,7 @@ final class WeatherAPI {
    
    - returns: The Response as a JSON object
    */
-  func getWeatherOpenWeatherData(parameters : [String : String], completionHandler:@escaping (_ dataModel: (OpenWeatherDataModel)) -> Void) {
+  func getWeatherForecastCurrent(parameters : [String : String], completionHandler:@escaping (_ dataModel: (OpenWeatherDataModel)) -> Void) {
     
     let dataModel = OpenWeatherDataModel()
     
@@ -126,7 +126,7 @@ final class WeatherAPI {
    
    - returns: The Response as a JSON object
    */
-  func getWeatherForecastOpenWeatherData(parameters : [String : String], completionHandler:@escaping (_ dataModel: (ForecastHourlyDataModel)) -> Void) {
+  func getWeatherForecastHourly(parameters : [String : String], completionHandler:@escaping (_ dataModel: (ForecastHourlyDataModel)) -> Void) {
     
     let dataModel = ForecastHourlyDataModel()
     
@@ -175,6 +175,64 @@ final class WeatherAPI {
     }
   }
   
+  /**
+   Fetches Weather Data and Parses the JSON string into a JSON object
+   
+   - parameter parameters: The Request Parameters
+   
+   - parameter completionHandler: The Callback Handler
+   
+   - returns: The Response as a JSON object
+   */
+  func getWeatherForecastDaily(parameters : [String : String], completionHandler:@escaping (_ dataModel: (ForecastDailyDataModel)) -> Void) {
+    
+    let dataModel = ForecastDailyDataModel()
+    
+    
+    Alamofire.request(APISearchType.forecastHourly.rawValue, method: .get, parameters: parameters).responseJSON {
+      response in
+      
+      guard response.result.error == nil else {
+        print("error calling GET ")
+        print(response.result.error!)
+        
+        dataModel.status = false
+        dataModel.errorMsg = "error calling GET"
+        completionHandler(dataModel)
+        return
+      }
+      
+      if (response.result.isSuccess) {
+        print("Success! Got the Weather Data")
+        
+        let payload : JSON = JSON(response.result.value!)
+        print(payload)
+        dataModel.parse(fromJson: payload)
+        
+        guard dataModel.list != nil && !dataModel.list.isEmpty else {
+          return
+        }
+        
+        for index in 0...dataModel.list.count-1 {
+          
+          for indexWeather in 0...dataModel.list[index].weather.count-1 {
+            
+            dataModel.list[index].weather[indexWeather].weatherIconImage = UIImage(named: "\(String(describing: dataModel.list[index].weather[indexWeather].icon!)).png")
+            
+          }
+        }
+        
+        completionHandler(dataModel)
+        
+      } else {
+        dataModel.status = false
+        dataModel.errorMsg = "Error occured while trying to parse data"
+        completionHandler(dataModel)
+        print("Error\(response.error!)")
+      }
+      
+    }
+  }
   
   private func getWeatherOpenWeatherDataImage(weatherIconImageName : String, completionHandler:@escaping (_ weatherIcon: (UIImage)) -> Void) {
     
@@ -198,7 +256,7 @@ final class WeatherAPI {
     let dateFormatter = DateFormatter()
     
     if Calendar.current.isDateInTomorrow(date) {
-     //return "Tomorrow"
+      //return "Tomorrow"
       dateFormatter.dateFormat = "h:mm a"
       return "\(dateFormatter.string(from: date))"
     } else if Calendar.current.isDateInYesterday(date) {
@@ -219,6 +277,14 @@ final class WeatherAPI {
     }
   }
   
+  func getDay(timeStamp: TimeInterval) -> String {
+    let date = Date(timeIntervalSince1970: timeStamp)
+    let dateFormatter = DateFormatter()
+    
+    dateFormatter.dateFormat = "EEEE"
+    return dateFormatter.string(from: date)
+    
+  }
   func dateFallsInCurrentWeek(date: Date) -> Bool {
     let currentWeek = Calendar.current.component(Calendar.Component.weekOfYear, from: Date())
     let datesWeek = Calendar.current.component(Calendar.Component.weekOfYear, from: date)
@@ -283,6 +349,6 @@ final class WeatherAPI {
     
     return windDirection
   }
+  
+  
 }
-
-

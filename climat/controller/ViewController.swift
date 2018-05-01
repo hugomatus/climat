@@ -13,21 +13,43 @@ import Alamofire
 import AlamofireImage
 import SwiftyJSON
 
-extension Date {
-  static func getFormattedDate(string: String ) -> String{
-    
-    //, formatter:String
-    let dateFormatterGet = DateFormatter()
-    dateFormatterGet.dateFormat = "yyyy-MM-dd'T'HH:mm:ss+hh:mm"
-    
-    let dateFormatterPrint = DateFormatter()
-    dateFormatterPrint.dateFormat = "MMM dd,yyyy"
-    
-    let date: Date? = dateFormatterGet.date(from: string)
-    print("Date",dateFormatterPrint.string(from: date!)) // Feb 01,2018
-    return dateFormatterPrint.string(from: date!);
+extension DateFormatter {
+  
+  convenience init (format: String) {
+    self.init()
+    dateFormat = format
+    locale = Locale.current
   }
 }
+
+extension String {
+  
+  func toDate (format: String) -> Date? {
+    return DateFormatter(format: format).date(from: self)
+  }
+  
+  func toDateString (inputFormat: String, outputFormat:String) -> String? {
+    if let date = toDate(format: inputFormat) {
+      return DateFormatter(format: outputFormat).string(from: date)
+    }
+    return nil
+  }
+}
+
+extension Date {
+  
+  func toString (format:String) -> String? {
+    return DateFormatter(format: format).string(from: self)
+  }
+  
+  func dayOfWeek() -> String? {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "EEEE"
+    return dateFormatter.string(from: self).capitalized
+    // or use capitalized(with: locale) if you want
+  }
+}
+
 
 class ViewController: UIViewController, CLLocationManagerDelegate, ChangeCityDelegate {
   
@@ -64,6 +86,13 @@ class ViewController: UIViewController, CLLocationManagerDelegate, ChangeCityDel
   
   @IBOutlet var forecastWeatherConditionTimeLabel: [UILabel]!
   
+  @IBOutlet var forecastWeatherDailyDayLabel: [UILabel]!
+  
+  @IBOutlet var forecastWeatherDailyIconImage: [UIImageView]!
+  
+  @IBOutlet var forecastWeatherDailyMinTempLabel: [UILabel]!
+  
+  @IBOutlet var forecastWeatherDailyMaxTempLabel: [UILabel]!
   
   let now = Date()
   let calendar = Calendar.current
@@ -105,6 +134,10 @@ class ViewController: UIViewController, CLLocationManagerDelegate, ChangeCityDel
       fetchWeatherCurrent(params)
       
       fetchWeatherForecast(params)
+      
+      let params2 : [String : String] = ["lat" : String(latitude), "lon" : String(longitude), "appid" : APISearchType.apiKey.rawValue, "cnt":"6"]
+      
+      fetchWeatherForecastDaily(params2)
       // api.openweathermap.org/data/2.5/forecast/daily?lat=35&lon=139&cnt=10
     }
   }
@@ -130,7 +163,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, ChangeCityDel
   @IBAction func refreshButtonPressed(_ sender: UIBarButtonItem) {
     
     viewDidLoad()
-
+    
   }
   
   
@@ -171,14 +204,14 @@ class ViewController: UIViewController, CLLocationManagerDelegate, ChangeCityDel
   }
   
   fileprivate func fetchWeatherCurrent(_ params: [String : String]) {
-    weatherAPI.getWeatherOpenWeatherData(parameters: params) { (dataModel) in
+    weatherAPI.getWeatherForecastCurrent(parameters: params) { (dataModel) in
       self.updateUIWithWeatherData(dataModel: dataModel)
     }
   }
   
   fileprivate func fetchWeatherForecast(_ params: [String : String]) {
-    weatherAPI.getWeatherForecastOpenWeatherData(parameters: params) { (dataModel) in
-      for index in 0...7 {
+    weatherAPI.getWeatherForecastHourly(parameters: params) { (dataModel) in
+      for index in 0...5 {
         self.forecastWeatherIconImage[index].image = dataModel.list[index].weather[0].weatherIconImage
         
         let dateTimeOfForecast = self.weatherAPI.getReadableDate(timeStamp:TimeInterval(dataModel.list[index].dt))
@@ -193,6 +226,34 @@ class ViewController: UIViewController, CLLocationManagerDelegate, ChangeCityDel
         "\(Int(dataModel.KtoF(kelvin: Float(dataModel.list[index].main.temp))))℉"
       }
     }
+  }
+  
+  fileprivate func fetchWeatherForecastDaily(_ params: [String : String]) {
+    weatherAPI.getWeatherForecastDaily(parameters: params) { (dataModel) in
+      for index in 0...5 {
+        self.forecastWeatherIconImage[index].image = dataModel.list[index].weather[0].weatherIconImage
+        
+        
+        self.forecastWeatherDailyDayLabel[index].text = self.weatherAPI.getDay(timeStamp: TimeInterval(dataModel.list[index].dt))
+        
+        self.forecastWeatherDailyMinTempLabel[index].text =
+          
+        "\(Int(dataModel.KtoF(kelvin: Float(dataModel.list[index].main.tempMin))))℉"
+        
+        self.forecastWeatherDailyMaxTempLabel[index].text =
+          
+        "\(Int(dataModel.KtoF(kelvin: Float(dataModel.list[index].main.tempMax))))℉"
+      }
+    }
+  }
+  
+  func getDayNameBy(stringDate: String) -> String
+  {
+    let df  = DateFormatter()
+    df.dateFormat = "YYYY-MM-dd"
+    let date = df.date(from: stringDate)!
+    df.dateFormat = "EEEE"
+    return df.string(from: date);
   }
 }
 

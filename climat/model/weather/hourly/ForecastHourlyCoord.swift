@@ -1,6 +1,8 @@
 //
 //	DataModelCoord.swift
-//	Model file generated using JSONExport: https://github.com/Ahmed-Ali/JSONExport
+//  Created by Hugo  Matus on 4/18/18.
+//  Copyright © 2018 Hugo  Matus. All rights reserved.
+//
 
 import Foundation 
 import SwiftyJSON

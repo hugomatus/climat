@@ -1,6 +1,8 @@
 //
 //	DataModelOpenWeather.swift
-//	Model file generated using JSONExport: https://github.com/Ahmed-Ali/JSONExport
+//  Created by Hugo  Matus on 4/18/18.
+//  Copyright © 2018 Hugo  Matus. All rights reserved.
+//
 
 import Foundation 
 import SwiftyJSON
@@ -39,34 +41,6 @@ class ForecastHourlyDataModel {
     }
     message = json["message"].floatValue
   }
-  
-	/**
-	 * Returns all the available property values in the form of [String:Any] object where the key is the approperiate json key and the value is the value of the corresponding property
-	 */
-	func toDictionary() -> [String:Any]
-	{
-		var dictionary = [String:Any]()
-		if city != nil{
-			dictionary["city"] = city.toDictionary()
-		}
-		if cnt != nil{
-			dictionary["cnt"] = cnt
-		}
-		if cod != nil{
-			dictionary["cod"] = cod
-		}
-		if list != nil{
-			var dictionaryElements = [[String:Any]]()
-			for listElement in list {
-				dictionaryElements.append(listElement.toDictionary())
-			}
-			dictionary["list"] = dictionaryElements
-		}
-		if message != nil{
-			dictionary["message"] = message
-		}
-		return dictionary
-	}
   
   func KtoC(kelvin : Float)->Float{
     
