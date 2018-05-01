@@ -89,12 +89,12 @@ class ViewController: UIViewController, CLLocationManagerDelegate, ChangeCityDel
   func updateUIWithWeatherData(dataModel : OpenWeatherDataModel) {
     
     cityLabel.text = dataModel.name
-    let tempF = Int(dataModel.KtoF(kelvin:dataModel.main.temp).rounded())
+    let tempF = Int(self.weatherAPI.KtoF(kelvin:dataModel.main.temp).rounded())
     currentTempLabel.text = String(tempF)+" ℉"
     weatherDescription.text = dataModel.weather[0].descriptionField.capitalizingFirstLetter()
     weatherIconImage.image = dataModel.weatherIconImage
-    minTempLabel.text = "\(Int(dataModel.KtoF(kelvin:dataModel.main.tempMin!).rounded())) ℉"
-    maxTempLabel.text = "\(Int(dataModel.KtoF(kelvin:dataModel.main.tempMax!).rounded())) ℉"
+    minTempLabel.text = "\(Int(self.weatherAPI.KtoF(kelvin:dataModel.main.tempMin!).rounded())) ℉"
+    maxTempLabel.text = "\(Int(self.weatherAPI.KtoF(kelvin:dataModel.main.tempMax!).rounded())) ℉"
     sunRiseLabel.text = weatherAPI.getReadableDate(timeStamp: TimeInterval(dataModel.sys.sunrise!))
     sunSetLabel.text = weatherAPI.getReadableDate(timeStamp: TimeInterval(dataModel.sys.sunset!))
   }

@@ -98,9 +98,9 @@ final class WeatherAPI {
         print("Success! Got the Weather Data")
         
         let payload : JSON = JSON(response.result.value!)
-        print("----------------START CURRENT CURRENT-----------------------")
-        print(payload)
-        print("----------------START CURRENT CURRENT-----------------------")
+//        print("----------------START CURRENT CURRENT-----------------------")
+//        print(payload)
+//        print("----------------START CURRENT CURRENT-----------------------")
         dataModel.parse(fromJson: payload)
         print(payload.stringValue)
         guard dataModel.weather != nil && !dataModel.weather.isEmpty else {
@@ -151,9 +151,9 @@ final class WeatherAPI {
         print("Success! Got the Weather Data")
         
         let payload : JSON = JSON(response.result.value!)
-        print("----------------START HOURLY HOURLY-----------------------")
-        print(payload)
-        print("----------------END HOURLY HOURLY-----------------------")
+//        print("----------------START HOURLY HOURLY-----------------------")
+//        print(payload)
+//        print("----------------END HOURLY HOURLY-----------------------")
         dataModel.parse(fromJson: payload)
         
         guard dataModel.list != nil && !dataModel.list.isEmpty else {
@@ -212,9 +212,9 @@ final class WeatherAPI {
         print("Success! Got the Weather Data")
         
         let payload : JSON = JSON(response.result.value!)
-        print("----------------START DAILY DAILY-----------------------")
-        print(payload)
-        print("----------------END DAILY DAILY-----------------------")
+        //        print("----------------START DAILY DAILY-----------------------")
+        //        print(payload)
+        //        print("----------------END DAILY DAILY-----------------------")
         dataModel.parse(fromJson: payload)
         
         guard dataModel.list != nil && !dataModel.list.isEmpty else {
@@ -268,9 +268,9 @@ final class WeatherAPI {
       dateFormatter.dateFormat = "h:mm a"
       return "\(dateFormatter.string(from: date))"
     } else if Calendar.current.isDateInYesterday(date) {
-      return "Yesterday"
-      //dateFormatter.dateFormat = "h:mm a"
-      //return dateFormatter.string(from: date)
+      //return "Yesterday"
+      dateFormatter.dateFormat = "h:mm a"
+      return dateFormatter.string(from: date)
     } else if dateFallsInCurrentWeek(date: date) {
       if Calendar.current.isDateInToday(date) {
         dateFormatter.dateFormat = "h:mm a"
