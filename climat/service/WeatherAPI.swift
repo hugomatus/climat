@@ -32,36 +32,6 @@ extension Optional where Wrapped == String {
   }
 }
 
-protocol Dateable {
-  func userFriendlyFullDate() -> String
-  func userFriendlyHours() -> String
-}
-
-extension Date: Dateable {
-  var  formatter: DateFormatter { return DateFormatter() }
-  
-  /** Return a user friendly hour */
-  func userFriendlyFullDate() -> String {
-    // Customize a date formatter
-    formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
-    formatter.timeZone = TimeZone(abbreviation: "UTC")
-    
-    return formatter.string(from: self)
-  }
-  
-  /** Return a user friendly hour */
-  func userFriendlyHours() -> String {
-    // Customize a date formatter
-    formatter.dateFormat = "HH:mm"
-    formatter.timeZone = TimeZone(abbreviation: "UTC")
-    
-    return formatter.string(from: self)
-  }
-  
-  // You can add many cases you need like string to date formatter
-  
-}
-
 /**
  Service Facade: Fetches Weather Data from OpenWeatherAPI
  */
@@ -98,9 +68,9 @@ final class WeatherAPI {
         print("Success! Got the Weather Data")
         
         let payload : JSON = JSON(response.result.value!)
-//        print("----------------START CURRENT CURRENT-----------------------")
-//        print(payload)
-//        print("----------------START CURRENT CURRENT-----------------------")
+        //        print("----------------START CURRENT CURRENT-----------------------")
+        //        print(payload)
+        //        print("----------------START CURRENT CURRENT-----------------------")
         dataModel.parse(fromJson: payload)
         print(payload.stringValue)
         guard dataModel.weather != nil && !dataModel.weather.isEmpty else {
@@ -151,9 +121,9 @@ final class WeatherAPI {
         print("Success! Got the Weather Data")
         
         let payload : JSON = JSON(response.result.value!)
-//        print("----------------START HOURLY HOURLY-----------------------")
-//        print(payload)
-//        print("----------------END HOURLY HOURLY-----------------------")
+        //        print("----------------START HOURLY HOURLY-----------------------")
+        //        print(payload)
+        //        print("----------------END HOURLY HOURLY-----------------------")
         dataModel.parse(fromJson: payload)
         
         guard dataModel.list != nil && !dataModel.list.isEmpty else {
@@ -289,9 +259,14 @@ final class WeatherAPI {
     let date = Date(timeIntervalSince1970: timeStamp)
     let dateFormatter = DateFormatter()
     
-    dateFormatter.dateFormat = "EEEE"
-    return dateFormatter.string(from: date)
-    
+    if dateFallsInCurrentWeek(date: date) {
+      dateFormatter.dateFormat = "EEEE"
+      return dateFormatter.string(from: date)
+    }
+    else {
+      dateFormatter.dateFormat = "MMM d, yyyy"
+      return dateFormatter.string(from: date)
+    }
   }
   
   func dateFallsInCurrentWeek(date: Date) -> Bool {

@@ -388,6 +388,13 @@
                                             </barButtonItem>
                                         </items>
                                     </toolbar>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Today" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hbW-lh-euz">
+                                        <rect key="frame" x="3" y="0.0" width="47" height="17"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                             </view>
                         </subviews>
@@ -424,7 +431,6 @@
                         <outletCollection property="forecastWeatherIconIConditionLabel" destination="yVT-XJ-w70" collectionClass="NSMutableArray" id="g9M-Hu-7NE"/>
                         <outletCollection property="forecastWeatherDailyDayLabel" destination="XFl-MO-an5" collectionClass="NSMutableArray" id="30f-ga-pwb"/>
                         <outletCollection property="forecastWeatherDailyDayLabel" destination="sSP-GR-BNM" collectionClass="NSMutableArray" id="uRs-t3-XlW"/>
-                        <outletCollection property="forecastWeatherDailyDayLabel" destination="sSP-GR-BNM" collectionClass="NSMutableArray" id="ygv-Tm-NIf"/>
                         <outletCollection property="forecastWeatherDailyDayLabel" destination="kno-98-nfV" collectionClass="NSMutableArray" id="i3r-6d-dQ3"/>
                         <outletCollection property="forecastWeatherDailyDayLabel" destination="fqH-en-ri0" collectionClass="NSMutableArray" id="AaO-ba-oHb"/>
                         <outletCollection property="forecastWeatherDailyDayLabel" destination="j1z-An-QHl" collectionClass="NSMutableArray" id="1br-9y-8P4"/>
