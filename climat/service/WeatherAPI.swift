@@ -12,25 +12,7 @@ import Alamofire
 import AlamofireImage
 import SwiftyJSON
 
-extension String {
-  func capitalizingFirstLetter() -> String {
-    return prefix(1).uppercased() + dropFirst()
-  }
-  
-  mutating func capitalizeFirstLetter() {
-    self = self.capitalizingFirstLetter()
-  }
-  
-  var isNilOrEmpty: Bool {
-    return self.trimmingCharacters(in: .whitespaces).isEmpty
-  }
-}
 
-extension Optional where Wrapped == String {
-  var isNilOrEmpty: Bool {
-    return self?.trimmingCharacters(in: .whitespaces).isEmpty ?? true
-  }
-}
 
 /**
  Service Facade: Fetches Weather Data from OpenWeatherAPI
@@ -229,51 +211,7 @@ final class WeatherAPI {
     }
   }
   
-  func getReadableDate(timeStamp: TimeInterval) -> String {
-    let date = Date(timeIntervalSince1970: timeStamp)
-    let dateFormatter = DateFormatter()
-    
-    if Calendar.current.isDateInTomorrow(date) {
-      //return "Tomorrow"
-      dateFormatter.dateFormat = "h:mm a"
-      return "\(dateFormatter.string(from: date))"
-    } else if Calendar.current.isDateInYesterday(date) {
-      //return "Yesterday"
-      dateFormatter.dateFormat = "h:mm a"
-      return dateFormatter.string(from: date)
-    } else if dateFallsInCurrentWeek(date: date) {
-      if Calendar.current.isDateInToday(date) {
-        dateFormatter.dateFormat = "h:mm a"
-        return dateFormatter.string(from: date)
-      } else {
-        dateFormatter.dateFormat = "EEEE"
-        return dateFormatter.string(from: date)
-      }
-    } else {
-      dateFormatter.dateFormat = "MMM d, yyyy"
-      return dateFormatter.string(from: date)
-    }
-  }
-  
-  func getDay(timeStamp: TimeInterval) -> String {
-    let date = Date(timeIntervalSince1970: timeStamp)
-    let dateFormatter = DateFormatter()
-    
-    if dateFallsInCurrentWeek(date: date) {
-      dateFormatter.dateFormat = "EEEE"
-      return dateFormatter.string(from: date)
-    }
-    else {
-      dateFormatter.dateFormat = "MMM d, yyyy"
-      return dateFormatter.string(from: date)
-    }
-  }
-  
-  func dateFallsInCurrentWeek(date: Date) -> Bool {
-    let currentWeek = Calendar.current.component(Calendar.Component.weekOfYear, from: Date())
-    let datesWeek = Calendar.current.component(Calendar.Component.weekOfYear, from: date)
-    return (currentWeek == datesWeek)
-  }
+ 
   
   func KtoC(kelvin : Float)->Float{
     
@@ -333,6 +271,4 @@ final class WeatherAPI {
     
     return windDirection
   }
-  
-  
 }
