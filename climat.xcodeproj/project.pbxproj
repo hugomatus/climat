@@ -13,6 +13,7 @@
 		2C0845472098BBC0001D2973 /* ForecastDailyCity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0845422098BBC0001D2973 /* ForecastDailyCity.swift */; };
 		2C0845482098BBC0001D2973 /* ForecastDailyDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0845432098BBC0001D2973 /* ForecastDailyDataModel.swift */; };
 		2C08454A2098BD98001D2973 /* sample-daily-forecast.json in Resources */ = {isa = PBXBuildFile; fileRef = 2C0845492098BD98001D2973 /* sample-daily-forecast.json */; };
+		2C356BD9209C154600670F8D /* WeatherUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C356BD8209C154600670F8D /* WeatherUtils.swift */; };
 		2C49C3F82079499B001825A1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C49C3F72079499B001825A1 /* AppDelegate.swift */; };
 		2C49C3FA2079499B001825A1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C49C3F92079499B001825A1 /* ViewController.swift */; };
 		2C49C3FD2079499B001825A1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C49C3FB2079499B001825A1 /* Main.storyboard */; };
@@ -64,6 +65,7 @@
 		2C0845422098BBC0001D2973 /* ForecastDailyCity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ForecastDailyCity.swift; path = climat/model/weather/ForecastDailyCity.swift; sourceTree = SOURCE_ROOT; };
 		2C0845432098BBC0001D2973 /* ForecastDailyDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ForecastDailyDataModel.swift; path = climat/model/weather/ForecastDailyDataModel.swift; sourceTree = SOURCE_ROOT; };
 		2C0845492098BD98001D2973 /* sample-daily-forecast.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "sample-daily-forecast.json"; sourceTree = "<group>"; };
+		2C356BD8209C154600670F8D /* WeatherUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherUtils.swift; sourceTree = "<group>"; };
 		2C49C3F42079499B001825A1 /* climat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = climat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C49C3F72079499B001825A1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2C49C3F92079499B001825A1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -278,6 +280,7 @@
 			children = (
 				2CF02AF5209BE8350046CBC4 /* DateHelper.swift */,
 				2CF02AF7209BE8540046CBC4 /* StringHelper.swift */,
+				2C356BD8209C154600670F8D /* WeatherUtils.swift */,
 			);
 			path = utils;
 			sourceTree = "<group>";
@@ -463,6 +466,7 @@
 				2CF02AF6209BE8350046CBC4 /* DateHelper.swift in Sources */,
 				2C0845472098BBC0001D2973 /* ForecastDailyCity.swift in Sources */,
 				2CBF6125208D0C7900F7A7CB /* ForecastHourlySnow.swift in Sources */,
+				2C356BD9209C154600670F8D /* WeatherUtils.swift in Sources */,
 				2CBF6128208D0C7900F7A7CB /* ForecastHourlyCity.swift in Sources */,
 				2CBF6126208D0C7900F7A7CB /* ForecastHourlyCoord.swift in Sources */,
 				2CE6AA1A20896F05004E00DC /* OpenWeatherDataModel.swift in Sources */,

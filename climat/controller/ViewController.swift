@@ -82,8 +82,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate, ChangeCityDel
       
       fetchWeatherForecastHourly(params)
       
-      let params2 : [String : String] = ["lat" : String(latitude), "lon" : String(longitude), "appid" : APISearchType.apiKey.rawValue, "cnt":"7"]
-      
       fetchWeatherForecastDaily(params)
     }
   }
@@ -116,21 +114,19 @@ class ViewController: UIViewController, CLLocationManagerDelegate, ChangeCityDel
       
       fetchWeatherForecastDaily(params)
       
-      //TimeZone.
     }
-    
   }
   
   fileprivate func fetchWeatherCurrent(_ params: [String : String]) {
     weatherAPI.getWeatherForecastCurrent(parameters: params) { (dataModel) in
       
       self.cityLabel.text = dataModel.name
-      let tempF = Int(self.weatherAPI.KtoF(kelvin:dataModel.main.temp).rounded())
+      let tempF = Int(WeatherUtils.KtoF(kelvin:dataModel.main.temp).rounded())
       self.currentTempLabel.text = String(tempF)+" ℉"
       self.weatherDescription.text = dataModel.weather[0].descriptionField.capitalizingFirstLetter()
       self.weatherIconImage.image = dataModel.weatherIconImage
-      self.minTempLabel.text = "\(Int(self.weatherAPI.KtoF(kelvin:dataModel.main.tempMin!).rounded())) ℉"
-      self.maxTempLabel.text = "\(Int(self.weatherAPI.KtoF(kelvin:dataModel.main.tempMax!).rounded())) ℉"
+      self.minTempLabel.text = "\(Int(WeatherUtils.KtoF(kelvin:dataModel.main.tempMin!).rounded())) ℉"
+      self.maxTempLabel.text = "\(Int(WeatherUtils.KtoF(kelvin:dataModel.main.tempMax!).rounded())) ℉"
       
       self.sunRiseLabel.text = Date(millsec: (dataModel.sys.sunrise!)).readableDate
       self.sunSetLabel.text = Date(millsec: (dataModel.sys.sunset!)).readableDate
@@ -153,7 +149,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, ChangeCityDel
         
         self.forecastWeatherIconIConditionLabel[index].text =
           
-        "\(Int(self.weatherAPI.KtoF(kelvin: Float(dataModel.list[index].main.temp))))℉"
+        "\(Int(WeatherUtils.KtoF(kelvin: Float(dataModel.list[index].main.temp))))℉"
       }
     }
   }
@@ -172,11 +168,11 @@ class ViewController: UIViewController, CLLocationManagerDelegate, ChangeCityDel
         
         self.forecastWeatherDailyMinTempLabel[index-1].text =
           
-        "\(Int(self.weatherAPI.KtoF(kelvin: Float(dataModel.list[index].temp.min))))℉"
+        "\(Int(WeatherUtils.KtoF(kelvin: Float(dataModel.list[index].temp.min))))℉"
         
         self.forecastWeatherDailyMaxTempLabel[index-1].text =
           
-        "\(Int(self.weatherAPI.KtoF(kelvin: Float(dataModel.list[index].temp.max))))℉"
+        "\(Int(WeatherUtils.KtoF(kelvin: Float(dataModel.list[index].temp.max))))℉"
       }
     }
   }
